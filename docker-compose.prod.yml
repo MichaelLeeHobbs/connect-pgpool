@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  mirthdb:
+    env_file: env/pg.env
+  mirth:
+    env_file: env/mirth.env
+  pgadmin:
+    env_file: env/ pgadmin.env
+  cpgp:
+    env_file: env/cpgp.env
+

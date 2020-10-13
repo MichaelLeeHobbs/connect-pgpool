@@ -1,0 +1,96 @@
+version: '3.7'
+
+services:
+  mirthdb:
+    image: postgres:13.0
+    volumes:
+      - mirth-db-data:/var/lib/postgresql/data
+      #- "/efs/volumes/mirth-db-data:/var/lib/postgresql/data:rw"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.99'
+          memory: 1000M
+        reservations:
+          cpus: '0.30'
+          memory: 300M
+      restart_policy:
+        condition: "any"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+    networks:
+      - db
+
+  mirth:
+    image: nextgenhealthcare/connect:3.9.0
+    volumes:
+      - mirth-data:/opt/mirthconnect/appdata
+      #- "/efs/volumes/mirth-data:/opt/mirthconnect/appdata:rw"
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+      - "5000-5099:5000-5099"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.90'
+          memory: 4096M
+        reservations:
+          cpus: '0.10'
+          memory: 2048M
+      restart_policy:
+        condition: "any"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+    networks:
+      - db
+
+  pgadmin:
+    image: dpage/pgadmin4:4.26
+    volumes:
+      #- "/efs/volumes/pgadmin:/root/.pgadmin:rw"
+      - mirth-pgadimn-data:/root/.pgadmin
+    ports:
+      - "8081:80"
+      - "8444:443"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.20'
+          memory: 512M
+      restart_policy:
+        condition: "any"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+    networks:
+      - db
+
+  cpgp:
+    image: michaelleehobbs/connect-pgpool:0.1.1
+    deploy:
+      resources:
+        limits:
+          cpus: '0.20'
+          memory: 512M
+      restart_policy:
+        condition: "any"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+    networks:
+      - db
+
+networks:
+  db:
+
+volumes:
+  mirth-data:
+  mirth-db-data:
+  mirth-pgadimn-data:
