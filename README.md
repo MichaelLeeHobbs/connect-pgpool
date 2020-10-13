@@ -15,3 +15,4 @@ Let Connect-PGPool handle your db connections to a PostgreSQL DB with pooling an
 3. yarn start:dev
 4. open mirth
 5. import backup
+6. yarn test
