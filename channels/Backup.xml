@@ -1,0 +1,3170 @@
+<channelGroup version="3.9.0">
+  <id>Default Group</id>
+  <name>[Default Group]</name>
+  <description>Channels not part of a group will appear here.</description>
+  <channels>
+    <channel version="3.9.0">
+      <id>687be862-0186-4c4f-adf8-167df5255fab</id>
+      <nextMetaDataId>2</nextMetaDataId>
+      <name>ChannelTester</name>
+      <description>{&#xd;
+	&quot;channelName&quot;: &quot;&quot;,&#xd;
+	&quot;message&quot;: &quot;&quot;&#xd;
+}&#xd;
+</description>
+      <revision>9</revision>
+      <sourceConnector version="3.9.0">
+        <metaDataId>0</metaDataId>
+        <name>sourceConnector</name>
+        <properties class="com.mirth.connect.connectors.http.HttpReceiverProperties" version="3.9.0">
+          <pluginProperties>
+            <com.mirth.connect.plugins.httpauth.NoneHttpAuthProperties version="3.9.0">
+  <authType>NONE</authType>
+            </com.mirth.connect.plugins.httpauth.NoneHttpAuthProperties>
+          </pluginProperties>
+          <listenerConnectorProperties version="3.9.0">
+            <host>0.0.0.0</host>
+            <port>5002</port>
+          </listenerConnectorProperties>
+          <sourceConnectorProperties version="3.9.0">
+            <responseVariable>d1</responseVariable>
+            <respondAfterProcessing>true</respondAfterProcessing>
+            <processBatch>false</processBatch>
+            <firstResponse>false</firstResponse>
+            <processingThreads>1</processingThreads>
+            <resourceIds class="linked-hash-map">
+              <entry>
+                <string>Default Resource</string>
+                <string>[Default Resource]</string>
+              </entry>
+            </resourceIds>
+            <queueBufferSize>1000</queueBufferSize>
+          </sourceConnectorProperties>
+          <xmlBody>false</xmlBody>
+          <parseMultipart>true</parseMultipart>
+          <includeMetadata>false</includeMetadata>
+          <binaryMimeTypes>application/.*(?&lt;!json|xml)$|image/.*|video/.*|audio/.*</binaryMimeTypes>
+          <binaryMimeTypesRegex>true</binaryMimeTypesRegex>
+          <responseContentType>application/json</responseContentType>
+          <responseDataTypeBinary>false</responseDataTypeBinary>
+          <responseStatusCode>200</responseStatusCode>
+          <responseHeaders class="linked-hash-map"/>
+          <responseHeadersVariable></responseHeadersVariable>
+          <useResponseHeadersVariable>false</useResponseHeadersVariable>
+          <charset>UTF-8</charset>
+          <contextPath></contextPath>
+          <timeout>30000</timeout>
+          <staticResources/>
+        </properties>
+        <transformer version="3.9.0">
+          <elements>
+            <com.mirth.connect.plugins.javascriptstep.JavaScriptStep version="3.9.0">
+              <sequenceNumber>0</sequenceNumber>
+              <enabled>true</enabled>
+              <script>$c(&apos;_channelID&apos;, getChannelNameIDMap()[msg.channelName])
+$c(&apos;_message&apos;, msg.message)</script>
+            </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
+          </elements>
+          <inboundTemplate encoding="base64"></inboundTemplate>
+          <outboundTemplate encoding="base64"></outboundTemplate>
+          <inboundDataType>JSON</inboundDataType>
+          <outboundDataType>JSON</outboundDataType>
+          <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </inboundProperties>
+          <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </outboundProperties>
+        </transformer>
+        <filter version="3.9.0">
+          <elements/>
+        </filter>
+        <transportName>HTTP Listener</transportName>
+        <mode>SOURCE</mode>
+        <enabled>true</enabled>
+        <waitForPrevious>true</waitForPrevious>
+      </sourceConnector>
+      <destinationConnectors>
+        <connector version="3.9.0">
+          <metaDataId>1</metaDataId>
+          <name>ChannelRouter</name>
+          <properties class="com.mirth.connect.connectors.vm.VmDispatcherProperties" version="3.9.0">
+            <pluginProperties/>
+            <destinationConnectorProperties version="3.9.0">
+              <queueEnabled>false</queueEnabled>
+              <sendFirst>false</sendFirst>
+              <retryIntervalMillis>10000</retryIntervalMillis>
+              <regenerateTemplate>false</regenerateTemplate>
+              <retryCount>0</retryCount>
+              <rotate>false</rotate>
+              <includeFilterTransformer>false</includeFilterTransformer>
+              <threadCount>1</threadCount>
+              <threadAssignmentVariable></threadAssignmentVariable>
+              <validateResponse>false</validateResponse>
+              <resourceIds class="linked-hash-map">
+                <entry>
+                  <string>Default Resource</string>
+                  <string>[Default Resource]</string>
+                </entry>
+              </resourceIds>
+              <queueBufferSize>1000</queueBufferSize>
+              <reattachAttachments>true</reattachAttachments>
+            </destinationConnectorProperties>
+            <channelId>${maps.get(&apos;_channelID&apos;)}</channelId>
+            <channelTemplate>${maps.get(&apos;_message&apos;)}</channelTemplate>
+            <mapVariables/>
+          </properties>
+          <transformer version="3.9.0">
+            <elements/>
+            <inboundDataType>JSON</inboundDataType>
+            <outboundDataType>JSON</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </transformer>
+          <responseTransformer version="3.9.0">
+            <elements/>
+            <inboundDataType>JSON</inboundDataType>
+            <outboundDataType>JSON</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </responseTransformer>
+          <filter version="3.9.0">
+            <elements/>
+          </filter>
+          <transportName>Channel Writer</transportName>
+          <mode>DESTINATION</mode>
+          <enabled>true</enabled>
+          <waitForPrevious>true</waitForPrevious>
+        </connector>
+      </destinationConnectors>
+      <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+      <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+      <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+      <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+      <properties version="3.9.0">
+        <clearGlobalChannelMap>true</clearGlobalChannelMap>
+        <messageStorageMode>DEVELOPMENT</messageStorageMode>
+        <encryptData>false</encryptData>
+        <removeContentOnCompletion>false</removeContentOnCompletion>
+        <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+        <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+        <initialState>STARTED</initialState>
+        <storeAttachments>true</storeAttachments>
+        <metaDataColumns>
+          <metaDataColumn>
+            <name>SOURCE</name>
+            <type>STRING</type>
+            <mappingName>mirth_source</mappingName>
+          </metaDataColumn>
+          <metaDataColumn>
+            <name>TYPE</name>
+            <type>STRING</type>
+            <mappingName>mirth_type</mappingName>
+          </metaDataColumn>
+        </metaDataColumns>
+        <attachmentProperties version="3.9.0">
+          <type>None</type>
+          <properties/>
+        </attachmentProperties>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+      </properties>
+      <exportData>
+        <metadata>
+          <enabled>true</enabled>
+          <lastModified>
+            <time>1602531872959</time>
+            <timezone>America/New_York</timezone>
+          </lastModified>
+          <pruningSettings>
+            <archiveEnabled>true</archiveEnabled>
+          </pruningSettings>
+        </metadata>
+        <codeTemplateLibraries>
+          <codeTemplateLibrary version="3.9.0">
+            <id>d382f981-c251-484d-86c5-bd76c56924c3</id>
+            <name>ChannelUtils</name>
+            <revision>5</revision>
+            <lastModified>
+              <time>1602548538651</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>8456e87d-530a-4c67-9cae-3b8cb2bcf144</id>
+                <name>getChannelNameIDMap</name>
+                <revision>3</revision>
+                <lastModified>
+                  <time>1602531752172</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>/**
+	Returns a channelID-to-channelName and channelName-to-channelID map.
+
+	@return {String} return description
+*/
+function getChannelNameIDMap() {
+	var map = {}
+	ChannelUtil.getChannelIds().toArray().forEach(id=&gt;{
+		var name = ChannelUtil.getChannelName(id)
+		map[id] = name
+		map[name] = id
+	})
+	return map
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+        </codeTemplateLibraries>
+      </exportData>
+    </channel>
+    <channel version="3.9.0">
+      <id>d4edf57b-e868-41ca-9b12-1ac51b2d6530</id>
+      <nextMetaDataId>2</nextMetaDataId>
+      <name>Hammer_receiver</name>
+      <description></description>
+      <revision>9</revision>
+      <sourceConnector version="3.9.0">
+        <metaDataId>0</metaDataId>
+        <name>sourceConnector</name>
+        <properties class="com.mirth.connect.connectors.tcp.TcpReceiverProperties" version="3.9.0">
+          <pluginProperties/>
+          <listenerConnectorProperties version="3.9.0">
+            <host>0.0.0.0</host>
+            <port>5001</port>
+          </listenerConnectorProperties>
+          <sourceConnectorProperties version="3.9.0">
+            <responseVariable>Auto-generate (Before processing)</responseVariable>
+            <respondAfterProcessing>true</respondAfterProcessing>
+            <processBatch>false</processBatch>
+            <firstResponse>true</firstResponse>
+            <processingThreads>50</processingThreads>
+            <resourceIds class="linked-hash-map">
+              <entry>
+                <string>Default Resource</string>
+                <string>[Default Resource]</string>
+              </entry>
+            </resourceIds>
+            <queueBufferSize>1000</queueBufferSize>
+          </sourceConnectorProperties>
+          <transmissionModeProperties class="com.mirth.connect.plugins.mllpmode.MLLPModeProperties">
+            <pluginPointName>MLLP</pluginPointName>
+            <startOfMessageBytes>0B</startOfMessageBytes>
+            <endOfMessageBytes>1C0D</endOfMessageBytes>
+            <useMLLPv2>false</useMLLPv2>
+            <ackBytes>06</ackBytes>
+            <nackBytes>15</nackBytes>
+            <maxRetries>2</maxRetries>
+          </transmissionModeProperties>
+          <serverMode>true</serverMode>
+          <remoteAddress></remoteAddress>
+          <remotePort></remotePort>
+          <overrideLocalBinding>false</overrideLocalBinding>
+          <reconnectInterval>5000</reconnectInterval>
+          <receiveTimeout>0</receiveTimeout>
+          <bufferSize>65536</bufferSize>
+          <maxConnections>100</maxConnections>
+          <keepConnectionOpen>true</keepConnectionOpen>
+          <dataTypeBinary>false</dataTypeBinary>
+          <charsetEncoding>DEFAULT_ENCODING</charsetEncoding>
+          <respondOnNewConnection>0</respondOnNewConnection>
+          <responseAddress></responseAddress>
+          <responsePort></responsePort>
+        </properties>
+        <transformer version="3.9.0">
+          <elements/>
+          <inboundDataType>HL7V2</inboundDataType>
+          <outboundDataType>HL7V2</outboundDataType>
+          <inboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+            <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+              <handleRepetitions>true</handleRepetitions>
+              <handleSubcomponents>true</handleSubcomponents>
+              <useStrictParser>false</useStrictParser>
+              <useStrictValidation>false</useStrictValidation>
+              <stripNamespaces>true</stripNamespaces>
+              <segmentDelimiter>\r</segmentDelimiter>
+              <convertLineBreaks>true</convertLineBreaks>
+            </serializationProperties>
+            <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+              <useStrictParser>false</useStrictParser>
+              <useStrictValidation>false</useStrictValidation>
+              <segmentDelimiter>\r</segmentDelimiter>
+            </deserializationProperties>
+            <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+              <splitType>MSH_Segment</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+            <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+              <segmentDelimiter>\r</segmentDelimiter>
+              <successfulACKCode>AA</successfulACKCode>
+              <successfulACKMessage></successfulACKMessage>
+              <errorACKCode>AE</errorACKCode>
+              <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+              <rejectedACKCode>AR</rejectedACKCode>
+              <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+              <msh15ACKAccept>false</msh15ACKAccept>
+              <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+            </responseGenerationProperties>
+            <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+              <successfulACKCode>AA,CA</successfulACKCode>
+              <errorACKCode>AE,CE</errorACKCode>
+              <rejectedACKCode>AR,CR</rejectedACKCode>
+              <validateMessageControlId>true</validateMessageControlId>
+              <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+              <originalIdMapVariable></originalIdMapVariable>
+            </responseValidationProperties>
+          </inboundProperties>
+          <outboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+            <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+              <handleRepetitions>true</handleRepetitions>
+              <handleSubcomponents>true</handleSubcomponents>
+              <useStrictParser>false</useStrictParser>
+              <useStrictValidation>false</useStrictValidation>
+              <stripNamespaces>true</stripNamespaces>
+              <segmentDelimiter>\r</segmentDelimiter>
+              <convertLineBreaks>true</convertLineBreaks>
+            </serializationProperties>
+            <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+              <useStrictParser>false</useStrictParser>
+              <useStrictValidation>false</useStrictValidation>
+              <segmentDelimiter>\r</segmentDelimiter>
+            </deserializationProperties>
+            <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+              <splitType>MSH_Segment</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+            <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+              <segmentDelimiter>\r</segmentDelimiter>
+              <successfulACKCode>AA</successfulACKCode>
+              <successfulACKMessage></successfulACKMessage>
+              <errorACKCode>AE</errorACKCode>
+              <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+              <rejectedACKCode>AR</rejectedACKCode>
+              <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+              <msh15ACKAccept>false</msh15ACKAccept>
+              <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+            </responseGenerationProperties>
+            <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+              <successfulACKCode>AA,CA</successfulACKCode>
+              <errorACKCode>AE,CE</errorACKCode>
+              <rejectedACKCode>AR,CR</rejectedACKCode>
+              <validateMessageControlId>true</validateMessageControlId>
+              <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+              <originalIdMapVariable></originalIdMapVariable>
+            </responseValidationProperties>
+          </outboundProperties>
+        </transformer>
+        <filter version="3.9.0">
+          <elements/>
+        </filter>
+        <transportName>TCP Listener</transportName>
+        <mode>SOURCE</mode>
+        <enabled>true</enabled>
+        <waitForPrevious>true</waitForPrevious>
+      </sourceConnector>
+      <destinationConnectors>
+        <connector version="3.9.0">
+          <metaDataId>1</metaDataId>
+          <name>Destination 1</name>
+          <properties class="com.mirth.connect.connectors.vm.VmDispatcherProperties" version="3.9.0">
+            <pluginProperties/>
+            <destinationConnectorProperties version="3.9.0">
+              <queueEnabled>false</queueEnabled>
+              <sendFirst>false</sendFirst>
+              <retryIntervalMillis>10000</retryIntervalMillis>
+              <regenerateTemplate>false</regenerateTemplate>
+              <retryCount>0</retryCount>
+              <rotate>false</rotate>
+              <includeFilterTransformer>false</includeFilterTransformer>
+              <threadCount>1</threadCount>
+              <threadAssignmentVariable></threadAssignmentVariable>
+              <validateResponse>false</validateResponse>
+              <resourceIds class="linked-hash-map">
+                <entry>
+                  <string>Default Resource</string>
+                  <string>[Default Resource]</string>
+                </entry>
+              </resourceIds>
+              <queueBufferSize>1000</queueBufferSize>
+              <reattachAttachments>true</reattachAttachments>
+            </destinationConnectorProperties>
+            <channelId>none</channelId>
+            <channelTemplate>${message.encodedData}</channelTemplate>
+            <mapVariables/>
+          </properties>
+          <transformer version="3.9.0">
+            <elements/>
+            <inboundDataType>HL7V2</inboundDataType>
+            <outboundDataType>HL7V2</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+              <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+                <handleRepetitions>true</handleRepetitions>
+                <handleSubcomponents>true</handleSubcomponents>
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <stripNamespaces>true</stripNamespaces>
+                <segmentDelimiter>\r</segmentDelimiter>
+                <convertLineBreaks>true</convertLineBreaks>
+              </serializationProperties>
+              <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <segmentDelimiter>\r</segmentDelimiter>
+              </deserializationProperties>
+              <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+                <splitType>MSH_Segment</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+              <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+                <segmentDelimiter>\r</segmentDelimiter>
+                <successfulACKCode>AA</successfulACKCode>
+                <successfulACKMessage></successfulACKMessage>
+                <errorACKCode>AE</errorACKCode>
+                <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+                <rejectedACKCode>AR</rejectedACKCode>
+                <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+                <msh15ACKAccept>false</msh15ACKAccept>
+                <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+              </responseGenerationProperties>
+              <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+                <successfulACKCode>AA,CA</successfulACKCode>
+                <errorACKCode>AE,CE</errorACKCode>
+                <rejectedACKCode>AR,CR</rejectedACKCode>
+                <validateMessageControlId>true</validateMessageControlId>
+                <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+                <originalIdMapVariable></originalIdMapVariable>
+              </responseValidationProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+              <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+                <handleRepetitions>true</handleRepetitions>
+                <handleSubcomponents>true</handleSubcomponents>
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <stripNamespaces>true</stripNamespaces>
+                <segmentDelimiter>\r</segmentDelimiter>
+                <convertLineBreaks>true</convertLineBreaks>
+              </serializationProperties>
+              <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <segmentDelimiter>\r</segmentDelimiter>
+              </deserializationProperties>
+              <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+                <splitType>MSH_Segment</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+              <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+                <segmentDelimiter>\r</segmentDelimiter>
+                <successfulACKCode>AA</successfulACKCode>
+                <successfulACKMessage></successfulACKMessage>
+                <errorACKCode>AE</errorACKCode>
+                <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+                <rejectedACKCode>AR</rejectedACKCode>
+                <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+                <msh15ACKAccept>false</msh15ACKAccept>
+                <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+              </responseGenerationProperties>
+              <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+                <successfulACKCode>AA,CA</successfulACKCode>
+                <errorACKCode>AE,CE</errorACKCode>
+                <rejectedACKCode>AR,CR</rejectedACKCode>
+                <validateMessageControlId>true</validateMessageControlId>
+                <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+                <originalIdMapVariable></originalIdMapVariable>
+              </responseValidationProperties>
+            </outboundProperties>
+          </transformer>
+          <responseTransformer version="3.9.0">
+            <elements/>
+            <inboundDataType>HL7V2</inboundDataType>
+            <outboundDataType>HL7V2</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+              <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+                <handleRepetitions>true</handleRepetitions>
+                <handleSubcomponents>true</handleSubcomponents>
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <stripNamespaces>true</stripNamespaces>
+                <segmentDelimiter>\r</segmentDelimiter>
+                <convertLineBreaks>true</convertLineBreaks>
+              </serializationProperties>
+              <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <segmentDelimiter>\r</segmentDelimiter>
+              </deserializationProperties>
+              <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+                <splitType>MSH_Segment</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+              <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+                <segmentDelimiter>\r</segmentDelimiter>
+                <successfulACKCode>AA</successfulACKCode>
+                <successfulACKMessage></successfulACKMessage>
+                <errorACKCode>AE</errorACKCode>
+                <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+                <rejectedACKCode>AR</rejectedACKCode>
+                <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+                <msh15ACKAccept>false</msh15ACKAccept>
+                <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+              </responseGenerationProperties>
+              <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+                <successfulACKCode>AA,CA</successfulACKCode>
+                <errorACKCode>AE,CE</errorACKCode>
+                <rejectedACKCode>AR,CR</rejectedACKCode>
+                <validateMessageControlId>true</validateMessageControlId>
+                <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+                <originalIdMapVariable></originalIdMapVariable>
+              </responseValidationProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+              <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+                <handleRepetitions>true</handleRepetitions>
+                <handleSubcomponents>true</handleSubcomponents>
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <stripNamespaces>true</stripNamespaces>
+                <segmentDelimiter>\r</segmentDelimiter>
+                <convertLineBreaks>true</convertLineBreaks>
+              </serializationProperties>
+              <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <segmentDelimiter>\r</segmentDelimiter>
+              </deserializationProperties>
+              <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+                <splitType>MSH_Segment</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+              <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+                <segmentDelimiter>\r</segmentDelimiter>
+                <successfulACKCode>AA</successfulACKCode>
+                <successfulACKMessage></successfulACKMessage>
+                <errorACKCode>AE</errorACKCode>
+                <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+                <rejectedACKCode>AR</rejectedACKCode>
+                <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+                <msh15ACKAccept>false</msh15ACKAccept>
+                <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+              </responseGenerationProperties>
+              <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+                <successfulACKCode>AA,CA</successfulACKCode>
+                <errorACKCode>AE,CE</errorACKCode>
+                <rejectedACKCode>AR,CR</rejectedACKCode>
+                <validateMessageControlId>true</validateMessageControlId>
+                <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+                <originalIdMapVariable></originalIdMapVariable>
+              </responseValidationProperties>
+            </outboundProperties>
+          </responseTransformer>
+          <filter version="3.9.0">
+            <elements/>
+          </filter>
+          <transportName>Channel Writer</transportName>
+          <mode>DESTINATION</mode>
+          <enabled>true</enabled>
+          <waitForPrevious>true</waitForPrevious>
+        </connector>
+      </destinationConnectors>
+      <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+      <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+      <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+      <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+      <properties version="3.9.0">
+        <clearGlobalChannelMap>true</clearGlobalChannelMap>
+        <messageStorageMode>DISABLED</messageStorageMode>
+        <encryptData>false</encryptData>
+        <removeContentOnCompletion>false</removeContentOnCompletion>
+        <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+        <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+        <initialState>STARTED</initialState>
+        <storeAttachments>false</storeAttachments>
+        <metaDataColumns>
+          <metaDataColumn>
+            <name>SOURCE</name>
+            <type>STRING</type>
+            <mappingName>mirth_source</mappingName>
+          </metaDataColumn>
+          <metaDataColumn>
+            <name>TYPE</name>
+            <type>STRING</type>
+            <mappingName>mirth_type</mappingName>
+          </metaDataColumn>
+        </metaDataColumns>
+        <attachmentProperties version="3.9.0">
+          <type>None</type>
+          <properties/>
+        </attachmentProperties>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+      </properties>
+      <exportData>
+        <metadata>
+          <enabled>true</enabled>
+          <lastModified>
+            <time>1602511437292</time>
+            <timezone>America/New_York</timezone>
+          </lastModified>
+          <pruningSettings>
+            <archiveEnabled>true</archiveEnabled>
+          </pruningSettings>
+        </metadata>
+        <codeTemplateLibraries/>
+      </exportData>
+    </channel>
+    <channel version="3.9.0">
+      <id>3d194c52-0c93-4104-95cb-c4c2baaa8f85</id>
+      <nextMetaDataId>2</nextMetaDataId>
+      <name>TestInterface</name>
+      <description>Example: ()=&gt;1+1</description>
+      <revision>9</revision>
+      <sourceConnector version="3.9.0">
+        <metaDataId>0</metaDataId>
+        <name>sourceConnector</name>
+        <properties class="com.mirth.connect.connectors.http.HttpReceiverProperties" version="3.9.0">
+          <pluginProperties>
+            <com.mirth.connect.plugins.httpauth.NoneHttpAuthProperties version="3.9.0">
+  <authType>NONE</authType>
+            </com.mirth.connect.plugins.httpauth.NoneHttpAuthProperties>
+          </pluginProperties>
+          <listenerConnectorProperties version="3.9.0">
+            <host>0.0.0.0</host>
+            <port>5003</port>
+          </listenerConnectorProperties>
+          <sourceConnectorProperties version="3.9.0">
+            <responseVariable>d1</responseVariable>
+            <respondAfterProcessing>true</respondAfterProcessing>
+            <processBatch>false</processBatch>
+            <firstResponse>false</firstResponse>
+            <processingThreads>1</processingThreads>
+            <resourceIds class="linked-hash-map">
+              <entry>
+                <string>Default Resource</string>
+                <string>[Default Resource]</string>
+              </entry>
+            </resourceIds>
+            <queueBufferSize>1000</queueBufferSize>
+          </sourceConnectorProperties>
+          <xmlBody>false</xmlBody>
+          <parseMultipart>true</parseMultipart>
+          <includeMetadata>false</includeMetadata>
+          <binaryMimeTypes>application/.*(?&lt;!json|xml)$|image/.*|video/.*|audio/.*</binaryMimeTypes>
+          <binaryMimeTypesRegex>true</binaryMimeTypesRegex>
+          <responseContentType>application/json</responseContentType>
+          <responseDataTypeBinary>false</responseDataTypeBinary>
+          <responseStatusCode></responseStatusCode>
+          <responseHeaders class="linked-hash-map"/>
+          <responseHeadersVariable></responseHeadersVariable>
+          <useResponseHeadersVariable>false</useResponseHeadersVariable>
+          <charset>UTF-8</charset>
+          <contextPath></contextPath>
+          <timeout>30000</timeout>
+          <staticResources/>
+        </properties>
+        <transformer version="3.9.0">
+          <elements/>
+          <inboundTemplate encoding="base64"></inboundTemplate>
+          <outboundTemplate encoding="base64"></outboundTemplate>
+          <inboundDataType>RAW</inboundDataType>
+          <outboundDataType>RAW</outboundDataType>
+          <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </inboundProperties>
+          <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </outboundProperties>
+        </transformer>
+        <filter version="3.9.0">
+          <elements/>
+        </filter>
+        <transportName>HTTP Listener</transportName>
+        <mode>SOURCE</mode>
+        <enabled>true</enabled>
+        <waitForPrevious>true</waitForPrevious>
+      </sourceConnector>
+      <destinationConnectors>
+        <connector version="3.9.0">
+          <metaDataId>1</metaDataId>
+          <name>Test</name>
+          <properties class="com.mirth.connect.connectors.js.JavaScriptDispatcherProperties" version="3.9.0">
+            <pluginProperties/>
+            <destinationConnectorProperties version="3.9.0">
+              <queueEnabled>false</queueEnabled>
+              <sendFirst>false</sendFirst>
+              <retryIntervalMillis>10000</retryIntervalMillis>
+              <regenerateTemplate>false</regenerateTemplate>
+              <retryCount>0</retryCount>
+              <rotate>false</rotate>
+              <includeFilterTransformer>false</includeFilterTransformer>
+              <threadCount>1</threadCount>
+              <threadAssignmentVariable></threadAssignmentVariable>
+              <validateResponse>false</validateResponse>
+              <resourceIds class="linked-hash-map">
+                <entry>
+                  <string>Default Resource</string>
+                  <string>[Default Resource]</string>
+                </entry>
+              </resourceIds>
+              <queueBufferSize>1000</queueBufferSize>
+              <reattachAttachments>true</reattachAttachments>
+            </destinationConnectorProperties>
+            <script>try {
+	return JSON.stringify({result: eval(&apos;(&apos;+ connectorMessage.getRawData() + &apos;)()&apos;)})
+} catch (e) {
+	return JSON.stringify({error: e.message, stack: e.stack})
+}
+
+</script>
+          </properties>
+          <transformer version="3.9.0">
+            <elements/>
+            <inboundTemplate encoding="base64"></inboundTemplate>
+            <outboundTemplate encoding="base64"></outboundTemplate>
+            <inboundDataType>RAW</inboundDataType>
+            <outboundDataType>JSON</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </transformer>
+          <responseTransformer version="3.9.0">
+            <elements/>
+            <inboundTemplate encoding="base64"></inboundTemplate>
+            <outboundTemplate encoding="base64"></outboundTemplate>
+            <inboundDataType>JSON</inboundDataType>
+            <outboundDataType>JSON</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </responseTransformer>
+          <filter version="3.9.0">
+            <elements/>
+          </filter>
+          <transportName>JavaScript Writer</transportName>
+          <mode>DESTINATION</mode>
+          <enabled>true</enabled>
+          <waitForPrevious>true</waitForPrevious>
+        </connector>
+      </destinationConnectors>
+      <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+      <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+      <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+      <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+      <properties version="3.9.0">
+        <clearGlobalChannelMap>true</clearGlobalChannelMap>
+        <messageStorageMode>DEVELOPMENT</messageStorageMode>
+        <encryptData>false</encryptData>
+        <removeContentOnCompletion>false</removeContentOnCompletion>
+        <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+        <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+        <initialState>STARTED</initialState>
+        <storeAttachments>true</storeAttachments>
+        <metaDataColumns>
+          <metaDataColumn>
+            <name>SOURCE</name>
+            <type>STRING</type>
+            <mappingName>mirth_source</mappingName>
+          </metaDataColumn>
+          <metaDataColumn>
+            <name>TYPE</name>
+            <type>STRING</type>
+            <mappingName>mirth_type</mappingName>
+          </metaDataColumn>
+        </metaDataColumns>
+        <attachmentProperties version="3.9.0">
+          <type>None</type>
+          <properties/>
+        </attachmentProperties>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+      </properties>
+      <exportData>
+        <metadata>
+          <enabled>true</enabled>
+          <lastModified>
+            <time>1602590953101</time>
+            <timezone>America/New_York</timezone>
+          </lastModified>
+          <pruningSettings>
+            <archiveEnabled>true</archiveEnabled>
+          </pruningSettings>
+        </metadata>
+        <codeTemplateLibraries>
+          <codeTemplateLibrary version="3.9.0">
+            <id>d382f981-c251-484d-86c5-bd76c56924c3</id>
+            <name>ChannelUtils</name>
+            <revision>5</revision>
+            <lastModified>
+              <time>1602548538651</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>8456e87d-530a-4c67-9cae-3b8cb2bcf144</id>
+                <name>getChannelNameIDMap</name>
+                <revision>3</revision>
+                <lastModified>
+                  <time>1602531752172</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>/**
+	Returns a channelID-to-channelName and channelName-to-channelID map.
+
+	@return {String} return description
+*/
+function getChannelNameIDMap() {
+	var map = {}
+	ChannelUtil.getChannelIds().toArray().forEach(id=&gt;{
+		var name = ChannelUtil.getChannelName(id)
+		map[id] = name
+		map[name] = id
+	})
+	return map
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+          <codeTemplateLibrary version="3.9.0">
+            <id>02386f09-a41f-4c3e-bd8a-d4c3a8056ede</id>
+            <name>ConnectPGPool</name>
+            <revision>8</revision>
+            <lastModified>
+              <time>1602548538647</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>5a249510-935e-4653-9af1-5b51b8bf2341</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>3e46d1bd-9c65-4ac6-b032-48245b40d621</id>
+                <name>cpgpExecute</name>
+                <revision>21</revision>
+                <lastModified>
+                  <time>1602551819586</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>if (typeof cpgpLibs === &apos;undefined&apos;) cpgpLibs = {}
+cpgpLibs.HttpClientBuilder = Packages.org.apache.http.impl.client.HttpClientBuilder
+cpgpLibs.HttpPost = Packages.org.apache.http.client.methods.HttpPost
+cpgpLibs.EntityUtils = Packages.org.apache.http.util.EntityUtils
+
+/**
+	Modify the description here. Modify the function name and parameters as needed. One function per
+	template is recommended; create a new code template for each new function.
+
+	@param {String} secret - secret key
+	@param {String} url - ConnectPGPool URL - for example http://cpgp:3000
+	@param {String} action - query/exec/execOne
+	@param {String} query - sql statement to run
+	@param {Array} params - sql params
+	@return {Object} returns sql result or error
+*/
+function cpgpExecute(args) {
+	var client = new cpgpLibs.HttpClientBuilder.create().build()
+	var url = args.url + &apos;/api/&apos; + args.action
+	var httpPost = new cpgpLibs.HttpPost(url)
+	var body = JSON.stringify({query: args.query, params: args.params || []})
+	var request = cpgpCreateRequest(args)
+	
+	httpPost.setHeader(&quot;Content-type&quot;, &quot;application/json&quot;)
+	httpPost.setHeader(&quot;X-Signature&quot;, cpgpCreateSignature({secret: args.secret, nonce: request.nonce, text: body}))
+	httpPost.setHeader(&quot;X-Request-ID&quot;, request.requestId)
+	httpPost.setHeader(&quot;X-nonce&quot;, request.nonce)
+	httpPost.setEntity(new StringEntity(body))
+
+	try {
+		return JSON.parse(cpgpLibs.EntityUtils.toString(client.execute(httpPost).getEntity(), &quot;UTF-8&quot;).trim())
+	} catch (e) {
+		return e
+	}
+}</code>
+                </properties>
+              </codeTemplate>
+              <codeTemplate version="3.9.0">
+                <id>f951adb6-46da-459f-a800-1101440ee5ed</id>
+                <name>cpgpGetClient</name>
+                <revision>1</revision>
+                <lastModified>
+                  <time>1602547914090</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>/**
+	Returns a Connect PGPool Client
+
+	@param {String} url - ConnectPGPool URL - for example http://cpgp:3000
+	@param {String} secret - preshared secret
+	@return {String} return description
+*/
+function cpgpGetClient(url, secret) {
+	return {
+		query: (args)=&gt;cpgpExecute({url: url, secret: secret, action: &apos;query&apos;, query: args.query, params: args.params}),
+		exec: (args)=&gt;cpgpExecute({url: url, secret: secret, action: &apos;exec&apos;, query: args.query, params: args.params}),
+		execOne: (args)=&gt;cpgpExecute({url: url, secret: secret, action: &apos;execOne&apos;, query: args.query, params: args.params}),	
+	}
+}</code>
+                </properties>
+              </codeTemplate>
+              <codeTemplate version="3.9.0">
+                <id>8d88b3e9-af46-46f8-b3d5-eee05ec30702</id>
+                <name>createRequest</name>
+                <revision>10</revision>
+                <lastModified>
+                  <time>1602547914046</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>if (typeof cpgpLibs === &apos;undefined&apos;) cpgpLibs = {}
+cpgpLibs.HttpClientBuilder = Packages.org.apache.http.impl.client.HttpClientBuilder
+cpgpLibs.HttpGet = Packages.org.apache.http.client.methods.HttpGet
+cpgpLibs.EntityUtils = Packages.org.apache.http.util.EntityUtils
+
+
+/**
+	Modify the description here. Modify the function name and parameters as needed. One function per
+	template is recommended; create a new code template for each new function.
+
+	@param {String} url - ConnectPGPool URL - for example http://localhost:3000
+	@return {Object} returns {requestId, nonce}
+*/
+function cpgpCreateRequest(params) {
+	var client = new cpgpLibs.HttpClientBuilder.create().build()
+	var url = params.url + &apos;/auth/request&apos;
+	var httpGet = new cpgpLibs.HttpGet(url)
+
+	try {
+		return JSON.parse(cpgpLibs.EntityUtils.toString(client.execute(httpGet).getEntity(), &quot;UTF-8&quot;).trim())
+	} catch (e) {
+		return e
+	}
+}</code>
+                </properties>
+              </codeTemplate>
+              <codeTemplate version="3.9.0">
+                <id>5801f535-70ef-4cd6-a177-0d6517dae3ad</id>
+                <name>createSignature</name>
+                <revision>6</revision>
+                <lastModified>
+                  <time>1602551819602</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>if (typeof cpgpLibs === &apos;undefined&apos;) cpgpLibs = {}
+cpgpLibs.Mac = Packages.javax.crypto.Mac
+cpgpLibs.SecretKeySpec = Packages.javax.crypto.spec.SecretKeySpec
+cpgpLibs.StandardCharsets = Packages.java.nio.charset.StandardCharsets
+
+const HMAC_SHA512 = &quot;HmacSHA512&quot;
+const getBytes = (val) =&gt; Packages.java.lang.String(val).getBytes(cpgpLibs.StandardCharsets.UTF_8)
+
+/**
+	Creates a Connect PGPool crypto signature
+
+	@param {String} key - secret key
+	@param {String} nonce - onetime nonce
+	@return {String} return Base64 sha512 signature
+*/
+function cpgpCreateSignature(params) {
+     var byteKey = getBytes(params.secret)
+     var sha512Hmac = cpgpLibs.Mac.getInstance(HMAC_SHA512)
+     sha512Hmac.init(new cpgpLibs.SecretKeySpec(byteKey, HMAC_SHA512))
+     var macData = sha512Hmac.doFinal(getBytes(params.nonce + params.text))
+     	logger.info(&apos;params.nonce: &apos; + params.nonce +  &apos; params.text: &apos; + params.text + &apos; secret: &apos; + params.secret)
+     return Packages.java.util.Base64.getEncoder().encodeToString(macData)
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+          <codeTemplateLibrary version="3.9.0">
+            <id>40e45a67-d4d0-4f83-8892-26f8f0ad1cbd</id>
+            <name>Crypto</name>
+            <revision>5</revision>
+            <lastModified>
+              <time>1602548538645</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>5a249510-935e-4653-9af1-5b51b8bf2341</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>0ffee4cf-52ce-4cdc-9fed-25227a55c617</id>
+                <name>sha256Hash</name>
+                <revision>1</revision>
+                <lastModified>
+                  <time>1602535591334</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>/**
+	Modify the description here. Modify the function name and parameters as needed. One function per
+	template is recommended; create a new code template for each new function.
+
+	@param {String} arg1 - arg1 description
+	@return {String} return description
+*/
+function sha256Hash(text) {
+	return com.google.common.hash.Hashing.sha256().hashUnencodedChars(JSON.stringify(text))
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+          <codeTemplateLibrary version="3.9.0">
+            <id>128794cd-83c2-40c8-a39f-21400456220f</id>
+            <name>TestUtils</name>
+            <revision>6</revision>
+            <lastModified>
+              <time>1602548538649</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>06d88223-4f9e-41fd-bef3-8a1d59c55f95</id>
+                <name>echo</name>
+                <revision>1</revision>
+                <lastModified>
+                  <time>1602442416450</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>function echo(val) {
+	return val
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+        </codeTemplateLibraries>
+      </exportData>
+    </channel>
+    <channel version="3.9.0">
+      <id>220a84de-344c-44df-8929-7dc52ca0caaf</id>
+      <nextMetaDataId>2</nextMetaDataId>
+      <name>cpgp-action</name>
+      <description>Example:&#xd;
+{&#xd;
+	&quot;action&quot;: &quot;exec&quot;,&#xd;
+	&quot;query&quot;: &quot;select * from channel;&quot;,&#xd;
+	&quot;params&quot;: [],&#xd;
+}&#xd;
+</description>
+      <revision>3</revision>
+      <sourceConnector version="3.9.0">
+        <metaDataId>0</metaDataId>
+        <name>sourceConnector</name>
+        <properties class="com.mirth.connect.connectors.vm.VmReceiverProperties" version="3.9.0">
+          <pluginProperties/>
+          <sourceConnectorProperties version="3.9.0">
+            <responseVariable>d1</responseVariable>
+            <respondAfterProcessing>true</respondAfterProcessing>
+            <processBatch>false</processBatch>
+            <firstResponse>false</firstResponse>
+            <processingThreads>10</processingThreads>
+            <resourceIds class="linked-hash-map">
+              <entry>
+                <string>Default Resource</string>
+                <string>[Default Resource]</string>
+              </entry>
+            </resourceIds>
+            <queueBufferSize>1000</queueBufferSize>
+          </sourceConnectorProperties>
+        </properties>
+        <transformer version="3.9.0">
+          <elements>
+            <com.mirth.connect.plugins.javascriptstep.JavaScriptStep version="3.9.0">
+              <sequenceNumber>0</sequenceNumber>
+              <enabled>true</enabled>
+              <script>$c(&apos;action&apos;, msg.action)</script>
+            </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
+          </elements>
+          <inboundTemplate encoding="base64"></inboundTemplate>
+          <outboundTemplate encoding="base64"></outboundTemplate>
+          <inboundDataType>JSON</inboundDataType>
+          <outboundDataType>JSON</outboundDataType>
+          <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </inboundProperties>
+          <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </outboundProperties>
+        </transformer>
+        <filter version="3.9.0">
+          <elements/>
+        </filter>
+        <transportName>Channel Reader</transportName>
+        <mode>SOURCE</mode>
+        <enabled>true</enabled>
+        <waitForPrevious>true</waitForPrevious>
+      </sourceConnector>
+      <destinationConnectors>
+        <connector version="3.9.0">
+          <metaDataId>1</metaDataId>
+          <name>cpgp-action</name>
+          <properties class="com.mirth.connect.connectors.http.HttpDispatcherProperties" version="3.9.0">
+            <pluginProperties/>
+            <destinationConnectorProperties version="3.9.0">
+              <queueEnabled>false</queueEnabled>
+              <sendFirst>false</sendFirst>
+              <retryIntervalMillis>10000</retryIntervalMillis>
+              <regenerateTemplate>false</regenerateTemplate>
+              <retryCount>0</retryCount>
+              <rotate>false</rotate>
+              <includeFilterTransformer>false</includeFilterTransformer>
+              <threadCount>1</threadCount>
+              <threadAssignmentVariable></threadAssignmentVariable>
+              <validateResponse>false</validateResponse>
+              <resourceIds class="linked-hash-map">
+                <entry>
+                  <string>Default Resource</string>
+                  <string>[Default Resource]</string>
+                </entry>
+              </resourceIds>
+              <queueBufferSize>1000</queueBufferSize>
+              <reattachAttachments>true</reattachAttachments>
+            </destinationConnectorProperties>
+            <host>http://cpgp:3000/api/${action}</host>
+            <useProxyServer>false</useProxyServer>
+            <proxyAddress></proxyAddress>
+            <proxyPort></proxyPort>
+            <method>post</method>
+            <headers class="linked-hash-map"/>
+            <parameters class="linked-hash-map"/>
+            <useHeadersVariable>false</useHeadersVariable>
+            <headersVariable></headersVariable>
+            <useParametersVariable>false</useParametersVariable>
+            <parametersVariable></parametersVariable>
+            <responseXmlBody>false</responseXmlBody>
+            <responseParseMultipart>true</responseParseMultipart>
+            <responseIncludeMetadata>false</responseIncludeMetadata>
+            <responseBinaryMimeTypes>application/.*(?&lt;!json|xml)$|image/.*|video/.*|audio/.*</responseBinaryMimeTypes>
+            <responseBinaryMimeTypesRegex>true</responseBinaryMimeTypesRegex>
+            <multipart>false</multipart>
+            <useAuthentication>false</useAuthentication>
+            <authenticationType>Basic</authenticationType>
+            <usePreemptiveAuthentication>false</usePreemptiveAuthentication>
+            <username></username>
+            <password></password>
+            <content>${message.encodedData}</content>
+            <contentType>application/json</contentType>
+            <dataTypeBinary>false</dataTypeBinary>
+            <charset>UTF-8</charset>
+            <socketTimeout>30000</socketTimeout>
+          </properties>
+          <transformer version="3.9.0">
+            <elements/>
+            <inboundDataType>JSON</inboundDataType>
+            <outboundDataType>JSON</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </transformer>
+          <responseTransformer version="3.9.0">
+            <elements/>
+            <inboundDataType>JSON</inboundDataType>
+            <outboundDataType>JSON</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </responseTransformer>
+          <filter version="3.9.0">
+            <elements/>
+          </filter>
+          <transportName>HTTP Sender</transportName>
+          <mode>DESTINATION</mode>
+          <enabled>true</enabled>
+          <waitForPrevious>true</waitForPrevious>
+        </connector>
+      </destinationConnectors>
+      <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+      <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+      <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+      <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+      <properties version="3.9.0">
+        <clearGlobalChannelMap>true</clearGlobalChannelMap>
+        <messageStorageMode>DEVELOPMENT</messageStorageMode>
+        <encryptData>false</encryptData>
+        <removeContentOnCompletion>false</removeContentOnCompletion>
+        <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+        <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+        <initialState>STARTED</initialState>
+        <storeAttachments>true</storeAttachments>
+        <metaDataColumns>
+          <metaDataColumn>
+            <name>SOURCE</name>
+            <type>STRING</type>
+            <mappingName>mirth_source</mappingName>
+          </metaDataColumn>
+          <metaDataColumn>
+            <name>TYPE</name>
+            <type>STRING</type>
+            <mappingName>mirth_type</mappingName>
+          </metaDataColumn>
+        </metaDataColumns>
+        <attachmentProperties version="3.9.0">
+          <type>None</type>
+          <properties/>
+        </attachmentProperties>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+      </properties>
+      <exportData>
+        <metadata>
+          <enabled>true</enabled>
+          <lastModified>
+            <time>1602430674104</time>
+            <timezone>America/New_York</timezone>
+          </lastModified>
+          <pruningSettings>
+            <archiveEnabled>true</archiveEnabled>
+          </pruningSettings>
+        </metadata>
+        <codeTemplateLibraries/>
+      </exportData>
+    </channel>
+    <channel version="3.9.0">
+      <id>5a249510-935e-4653-9af1-5b51b8bf2341</id>
+      <nextMetaDataId>2</nextMetaDataId>
+      <name>cpgp-request</name>
+      <description></description>
+      <revision>1</revision>
+      <sourceConnector version="3.9.0">
+        <metaDataId>0</metaDataId>
+        <name>sourceConnector</name>
+        <properties class="com.mirth.connect.connectors.vm.VmReceiverProperties" version="3.9.0">
+          <pluginProperties/>
+          <sourceConnectorProperties version="3.9.0">
+            <responseVariable>d1</responseVariable>
+            <respondAfterProcessing>true</respondAfterProcessing>
+            <processBatch>false</processBatch>
+            <firstResponse>false</firstResponse>
+            <processingThreads>1</processingThreads>
+            <resourceIds class="linked-hash-map">
+              <entry>
+                <string>Default Resource</string>
+                <string>[Default Resource]</string>
+              </entry>
+            </resourceIds>
+            <queueBufferSize>1000</queueBufferSize>
+          </sourceConnectorProperties>
+        </properties>
+        <transformer version="3.9.0">
+          <elements/>
+          <inboundDataType>RAW</inboundDataType>
+          <outboundDataType>RAW</outboundDataType>
+          <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </inboundProperties>
+          <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </outboundProperties>
+        </transformer>
+        <filter version="3.9.0">
+          <elements/>
+        </filter>
+        <transportName>Channel Reader</transportName>
+        <mode>SOURCE</mode>
+        <enabled>true</enabled>
+        <waitForPrevious>true</waitForPrevious>
+      </sourceConnector>
+      <destinationConnectors>
+        <connector version="3.9.0">
+          <metaDataId>1</metaDataId>
+          <name>cpgp</name>
+          <properties class="com.mirth.connect.connectors.http.HttpDispatcherProperties" version="3.9.0">
+            <pluginProperties/>
+            <destinationConnectorProperties version="3.9.0">
+              <queueEnabled>false</queueEnabled>
+              <sendFirst>false</sendFirst>
+              <retryIntervalMillis>10000</retryIntervalMillis>
+              <regenerateTemplate>false</regenerateTemplate>
+              <retryCount>0</retryCount>
+              <rotate>false</rotate>
+              <includeFilterTransformer>false</includeFilterTransformer>
+              <threadCount>1</threadCount>
+              <threadAssignmentVariable></threadAssignmentVariable>
+              <validateResponse>false</validateResponse>
+              <resourceIds class="linked-hash-map">
+                <entry>
+                  <string>Default Resource</string>
+                  <string>[Default Resource]</string>
+                </entry>
+              </resourceIds>
+              <queueBufferSize>1000</queueBufferSize>
+              <reattachAttachments>true</reattachAttachments>
+            </destinationConnectorProperties>
+            <host>http://cpgp:3000/auth/request</host>
+            <useProxyServer>false</useProxyServer>
+            <proxyAddress></proxyAddress>
+            <proxyPort></proxyPort>
+            <method>get</method>
+            <headers class="linked-hash-map"/>
+            <parameters class="linked-hash-map"/>
+            <useHeadersVariable>false</useHeadersVariable>
+            <headersVariable></headersVariable>
+            <useParametersVariable>false</useParametersVariable>
+            <parametersVariable></parametersVariable>
+            <responseXmlBody>false</responseXmlBody>
+            <responseParseMultipart>true</responseParseMultipart>
+            <responseIncludeMetadata>false</responseIncludeMetadata>
+            <responseBinaryMimeTypes>application/.*(?&lt;!json|xml)$|image/.*|video/.*|audio/.*</responseBinaryMimeTypes>
+            <responseBinaryMimeTypesRegex>true</responseBinaryMimeTypesRegex>
+            <multipart>false</multipart>
+            <useAuthentication>false</useAuthentication>
+            <authenticationType>Basic</authenticationType>
+            <usePreemptiveAuthentication>false</usePreemptiveAuthentication>
+            <username></username>
+            <password></password>
+            <content></content>
+            <contentType>application/json</contentType>
+            <dataTypeBinary>false</dataTypeBinary>
+            <charset>UTF-8</charset>
+            <socketTimeout>30000</socketTimeout>
+          </properties>
+          <transformer version="3.9.0">
+            <elements/>
+            <inboundDataType>RAW</inboundDataType>
+            <outboundDataType>RAW</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </transformer>
+          <responseTransformer version="3.9.0">
+            <elements/>
+            <inboundDataType>RAW</inboundDataType>
+            <outboundDataType>RAW</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </responseTransformer>
+          <filter version="3.9.0">
+            <elements/>
+          </filter>
+          <transportName>HTTP Sender</transportName>
+          <mode>DESTINATION</mode>
+          <enabled>true</enabled>
+          <waitForPrevious>true</waitForPrevious>
+        </connector>
+      </destinationConnectors>
+      <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+      <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+      <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+      <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+      <properties version="3.9.0">
+        <clearGlobalChannelMap>true</clearGlobalChannelMap>
+        <messageStorageMode>DEVELOPMENT</messageStorageMode>
+        <encryptData>false</encryptData>
+        <removeContentOnCompletion>false</removeContentOnCompletion>
+        <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+        <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+        <initialState>STARTED</initialState>
+        <storeAttachments>true</storeAttachments>
+        <metaDataColumns>
+          <metaDataColumn>
+            <name>SOURCE</name>
+            <type>STRING</type>
+            <mappingName>mirth_source</mappingName>
+          </metaDataColumn>
+          <metaDataColumn>
+            <name>TYPE</name>
+            <type>STRING</type>
+            <mappingName>mirth_type</mappingName>
+          </metaDataColumn>
+        </metaDataColumns>
+        <attachmentProperties version="3.9.0">
+          <type>None</type>
+          <properties/>
+        </attachmentProperties>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+      </properties>
+      <exportData>
+        <metadata>
+          <enabled>true</enabled>
+          <lastModified>
+            <time>1602544557725</time>
+            <timezone>America/New_York</timezone>
+          </lastModified>
+          <pruningSettings>
+            <archiveEnabled>true</archiveEnabled>
+          </pruningSettings>
+        </metadata>
+        <codeTemplateLibraries/>
+      </exportData>
+    </channel>
+    <channel version="3.9.0">
+      <id>1eaf2a13-b69c-4557-9333-02f6c0420c11</id>
+      <nextMetaDataId>2</nextMetaDataId>
+      <name>Hammer_sender_v1</name>
+      <description></description>
+      <revision>12</revision>
+      <sourceConnector version="3.9.0">
+        <metaDataId>0</metaDataId>
+        <name>sourceConnector</name>
+        <properties class="com.mirth.connect.connectors.vm.VmReceiverProperties" version="3.9.0">
+          <pluginProperties/>
+          <sourceConnectorProperties version="3.9.0">
+            <responseVariable>None</responseVariable>
+            <respondAfterProcessing>true</respondAfterProcessing>
+            <processBatch>true</processBatch>
+            <firstResponse>false</firstResponse>
+            <processingThreads>10</processingThreads>
+            <resourceIds class="linked-hash-map">
+              <entry>
+                <string>Default Resource</string>
+                <string>[Default Resource]</string>
+              </entry>
+            </resourceIds>
+            <queueBufferSize>1000</queueBufferSize>
+          </sourceConnectorProperties>
+        </properties>
+        <transformer version="3.9.0">
+          <elements>
+            <com.mirth.connect.plugins.javascriptstep.JavaScriptStep version="3.9.0">
+              <sequenceNumber>0</sequenceNumber>
+              <enabled>true</enabled>
+              <script>tmp[&apos;MSH&apos;][&apos;MSH.10&apos;][&apos;MSH.10.1&apos;] = msg</script>
+            </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
+          </elements>
+          <inboundTemplate encoding="base64"></inboundTemplate>
+          <outboundTemplate encoding="base64">TVNIfF5+XCZ8UkEtVk9JQ0UtU0VSVkVSfHxSQS1WT0lDRS1TRVJWRVJ8MTExfDIwMjAxMDExMDgz
+MzQwLTA3MDB8fE9SVV5SMDF8MHxQfDIuNHx8fHx8VVNBClBJRHx8MTExLTIyMjIyXl5eQUJDREVe
+UEl8MTExMTExXl5eQUJDREVeTkl8MTExMTExVjExMjM1NF5eXkFCQ0RFXk5JfERPRV5KT0hOXkVe
+SlJ8fDE5MDAxMjAxfE18fDExMTEtM15eMTExXjIyMjItM15eQ0RDfFNPTUVXSEVSRV4iIl5OT1dI
+RVJeQUFeODU3MTB8fCgxMTEpMjIyLTMzM3wiInx8fHx8MTExMTExMXx8fDExMTExLTVeXjExMV4y
+MjItNV5eQ0RDClBWMXx8T3x8fHx8fHx8fFBIT05FLVheXl5TT01FV0hFUkV8fHx8QTB8fHx8TzIw
+MjAwMTAxCk9SQ3xYT3wxMTExLTIyMjIyLTE0fDExMTEtMjIyMjItMTR8fElQfHxeXl5eXlJ8fDIw
+MjAxMDExMDgyOC0wNzAwfDExMTFeRE9FXkpPSE5eRF5eXk1EfHwxMTExXkRPRV5KT0hOXkReXl5N
+RHxNRURJQ0lORSBTRVJWSUNFfDExMTFeV1BOXlBIfHx8TUVEXk1FRElDSU5FIFNFUlZJQ0VeUEFD
+UzQ5Ck9CUnwxfDExMTEtMjIyMjItMTR8MTExMS0yMjIyMi0xNHwxMTExMV5DVCBUSE9SQVggVy9P
+IERZRV5DNF4xMTExXkNUIENIRVNUIFcvTyBDT05UUkFTVF45OVJBUHxSfHx8fHx8fHx8fHwxMTEx
+XkRPRV5KT0hOXkReXl5NRHwxMTExXldQTl5QSHwxMTExLTIyMjIyLTE0fDE0fDExMTEtMjIyMjIt
+MTR8Q1RfQ1QgU0NBTmA3X0NBVCBTQ0FOYFNPTUVXSEVSRXx8fENUfHx8Xl5eXl5SfHx8V0FMS3xe
+cGFpbgpaRFN8MS4yLjg0MC4xMjMxMjMuMS40LjMzMy4yMzI0MjM0LjkxNzEuMS4xMTEuMzI0MjM0
+LjE0XlBBQ1NeQXBwbGljYXRpb25eRElDT00KT0JYfDF8Q0V8UF5QUk9DRURVUkVeTHx8MTIzNF5D
+VCBDSEVTVCBXL08gQ09OVFJBU1ReTHx8fHx8fE8KT0JYfDJ8VFh8SF5ISVNUT1JZXkx8fFJlYXNv
+biBmb3IgU3R1ZHk6IFBBSU58fHx8fHxPCk9CWHwzfFRYfEheSElTVE9SWV5MfHwgfHx8fHx8TwpP
+Qlh8NHxUWHxIXkhJU1RPUlleTHx8Q1QgQ0hFU1QgVy9DT05UICAxWSAgTm8gUmVjZW50IEV4YW0g
+Q1QgQ0hFU1QgVy9PIENPTlQgIDFZICBObyBSZWNlbnQgRXhhbSB8fHx8fHxPCk9CWHw1fFRYfEhe
+SElTVE9SWV5MfHwgfHx8fHx8TwpPQlh8NnxUWHxIXkhJU1RPUlleTHx8IHx8fHx8fE8KT0JYfDd8
+VFh8SF5ISVNUT1JZXkx8fE5vIENSRUFUSU5JTkUgcmVzdWx0cyBpbiBsYXN0IDMwRCB8fHx8fHxP
+Ck9CWHw4fFRYfEheSElTVE9SWV5MfHwgfHx8fHx8TwpPQlh8OXxUWHxIXkhJU1RPUlleTHx8IHx8
+fHx8fE8KT0JYfDEwfFRYfEheSElTVE9SWV5MfHwgIE5vIGRhdGEgYXZhaWxhYmxlIGZvciBFR0ZS
+IHx8fHx8fE8KT0JYfDExfFRYfEheSElTVE9SWV5MfHwgfHx8fHx8TwpPQlh8MTJ8VFh8SF5ISVNU
+T1JZXkx8fCB8fHx8fHxPCk9CWHwxM3xUWHxIXkhJU1RPUlleTHx8Qk9EWSBNQVNTIElOREVYIEZF
+QiAwMSwgMjAwMUAxMjowMDowMCAgIDIwLjAgfHx8fHx8TwpPQlh8MTR8VFh8SF5ISVNUT1JZXkx8
+fCB8fHx8fHxPCk9CWHwxNXxUWHxIXkhJU1RPUlleTHx8IHx8fHx8fE8KT0JYfDE2fFRYfEheSElT
+VE9SWV5MfHxSRUFTT04gRk9SIEVYQU06IFBBSU4gfHx8fHx8TwpPQlh8MTd8VFh8SF5ISVNUT1JZ
+Xkx8fCB8fHx8fHxPCk9CWHwxOHxUWHxIXkhJU1RPUlleTHx8IHx8fHx8fE8KT0JYfDE5fFRYfEhe
+SElTVE9SWV5MfHxQRVJUSU5FTlQgUEFUSUVOVCBISVNUT1JZOiA5OSBNIHdpdGggcGFpbnx8fHx8
+fE8KT0JYfDIwfFRYfEheSElTVE9SWV5MfHxMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCwgY29u
+c2VjdGV0dXIgYWRpcGlzY2luZyBlbGl0LiBOdWxsYSBtYXR0aXMgZWxlbWVudHVtIHB1bHZpbmFy
+LiBOYW0gaW1wZXJkaWV0IGNvbnNlcXVhdCBmYXVjaWJ1cy4gIHx8fHx8fE8KT0JYfDIxfFRYfEhe
+SElTVE9SWV5MfHxTZWQgdGluY2lkdW50IGRpYW0gYXQgbmlzbCBzdXNjaXBpdCBiaWJlbmR1bS4g
+UGhhc2VsbHVzIGdyYXZpZGEgbmlzaSB2aXRhZSBkdWkgb3JuYXJlIHRpbmNpZHVudC4gUHJvaW4g
+YSB2YXJpdXMgYXVndWUuIHx8fHx8fE8KT0JYfDIyfFRYfEheSElTVE9SWV5MfHxJbnRlZ2VyIHBy
+ZXRpdW0gYWNjdW1zYW4gcHVydXMgdmVsIHNlbXBlci4gUHJvaW4gZGlnbmlzc2ltIGZhdWNpYnVz
+IG1hc3NhLCBlZ2V0IHRlbXB1cyByaXN1cyBwbGFjZXJhdCBzZWQuIFAufHx8fHx8TwpPQlh8MjN8
+VFh8SF5ISVNUT1JZXkx8fCB8fHx8fHxPCk9CWHwyNHxUWHxIXkhJU1RPUlleTHx8VXQgZW5pbSBh
+ZCBtaW5pbWEgdmVuaWFtLCBxdWlzIG5vc3RydW0gZXhlcmNpdGF0aW9uZW0gdWxsYW0gY29ycG9y
+aXMgfHx8fHx8TwpPQlh8MjV8VFh8SF5ISVNUT1JZXkx8fCB8fHx8fHxPCk9CWHwyNnxUWHxIXkhJ
+U1RPUlleTHx8IHx8fHx8fE8KT0JYfDI3fFRYfEheSElTVE9SWV5MfHwgfHx8fHx8TwpPQlh8Mjh8
+VFh8SF5ISVNUT1JZXkx8fCB8fHx8fHxPCk9CWHwyOXxUWHxIXkhJU1RPUlleTHx8ICAgICAgICAg
+UHJvdmlkZXI6IERPRSB8fHx8fHxPCk9CWHwzMHxUWHxIXkhJU1RPUlleTHx8ICAgQ29udGFjdCBO
+dW1iZXI6IDU1NS01MDUtMTIzNCB8fHx8fHxPCk9CWHwzMXxUWHxIXkhJU1RPUlleTHx8IHx8fHx8
+fE8KT0JYfDMyfFRYfEheSElTVE9SWV5MfHxTZWNvbmRhcnkgQ29udGFjdDogfHx8fHx8TwpPQlh8
+MzN8VFh8SF5ISVNUT1JZXkx8fCAgIENvbnRhY3QgTnVtYmVyOiAgICB8fHx8fHxPCk9CWHwzNHxU
+WHxUQ01eVEVDSCBDT01NRU5UXkx8fHx8fHx8fE8KT0JYfDM1fFRYfFRDTV5URUNIIENPTU1FTlRe
+THx8fHx8fHx8Tw==</outboundTemplate>
+          <inboundDataType>RAW</inboundDataType>
+          <outboundDataType>HL7V2</outboundDataType>
+          <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript>var data = $gc(&apos;data&apos;) || {i: 0}
+
+if (data == null || !data.n) {
+	data = {i: 0, n: parseInt(String(reader.readLine())), start: new Date()}
+}
+if (data.i &gt; data.n) {
+	data.end = new Date()
+	data.n = undefined
+	data.dt = data.end - data.start
+	$gc(&apos;data&apos;, data)
+	$gc(&apos;result&apos;, JSON.stringify(data, null, 2))
+	return null
+}
+++data.i
+$gc(&apos;data&apos;, data)
+return data.i
+</batchScript>
+            </batchProperties>
+          </inboundProperties>
+          <outboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+            <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+              <handleRepetitions>true</handleRepetitions>
+              <handleSubcomponents>true</handleSubcomponents>
+              <useStrictParser>false</useStrictParser>
+              <useStrictValidation>false</useStrictValidation>
+              <stripNamespaces>true</stripNamespaces>
+              <segmentDelimiter>\r</segmentDelimiter>
+              <convertLineBreaks>true</convertLineBreaks>
+            </serializationProperties>
+            <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+              <useStrictParser>false</useStrictParser>
+              <useStrictValidation>false</useStrictValidation>
+              <segmentDelimiter>\r</segmentDelimiter>
+            </deserializationProperties>
+            <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+              <splitType>MSH_Segment</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+            <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+              <segmentDelimiter>\r</segmentDelimiter>
+              <successfulACKCode>AA</successfulACKCode>
+              <successfulACKMessage></successfulACKMessage>
+              <errorACKCode>AE</errorACKCode>
+              <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+              <rejectedACKCode>AR</rejectedACKCode>
+              <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+              <msh15ACKAccept>false</msh15ACKAccept>
+              <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+            </responseGenerationProperties>
+            <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+              <successfulACKCode>AA,CA</successfulACKCode>
+              <errorACKCode>AE,CE</errorACKCode>
+              <rejectedACKCode>AR,CR</rejectedACKCode>
+              <validateMessageControlId>true</validateMessageControlId>
+              <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+              <originalIdMapVariable></originalIdMapVariable>
+            </responseValidationProperties>
+          </outboundProperties>
+        </transformer>
+        <filter version="3.9.0">
+          <elements/>
+        </filter>
+        <transportName>Channel Reader</transportName>
+        <mode>SOURCE</mode>
+        <enabled>true</enabled>
+        <waitForPrevious>true</waitForPrevious>
+      </sourceConnector>
+      <destinationConnectors>
+        <connector version="3.9.0">
+          <metaDataId>1</metaDataId>
+          <name>Hammer_Receiver</name>
+          <properties class="com.mirth.connect.connectors.vm.VmDispatcherProperties" version="3.9.0">
+            <pluginProperties/>
+            <destinationConnectorProperties version="3.9.0">
+              <queueEnabled>false</queueEnabled>
+              <sendFirst>false</sendFirst>
+              <retryIntervalMillis>10000</retryIntervalMillis>
+              <regenerateTemplate>false</regenerateTemplate>
+              <retryCount>0</retryCount>
+              <rotate>false</rotate>
+              <includeFilterTransformer>false</includeFilterTransformer>
+              <threadCount>1</threadCount>
+              <threadAssignmentVariable></threadAssignmentVariable>
+              <validateResponse>false</validateResponse>
+              <resourceIds class="linked-hash-map">
+                <entry>
+                  <string>Default Resource</string>
+                  <string>[Default Resource]</string>
+                </entry>
+              </resourceIds>
+              <queueBufferSize>1000</queueBufferSize>
+              <reattachAttachments>true</reattachAttachments>
+            </destinationConnectorProperties>
+            <channelId>d4edf57b-e868-41ca-9b12-1ac51b2d6530</channelId>
+            <channelTemplate>${message.encodedData}</channelTemplate>
+            <mapVariables/>
+          </properties>
+          <transformer version="3.9.0">
+            <elements/>
+            <inboundDataType>HL7V2</inboundDataType>
+            <outboundDataType>HL7V2</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+              <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+                <handleRepetitions>true</handleRepetitions>
+                <handleSubcomponents>true</handleSubcomponents>
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <stripNamespaces>true</stripNamespaces>
+                <segmentDelimiter>\r</segmentDelimiter>
+                <convertLineBreaks>true</convertLineBreaks>
+              </serializationProperties>
+              <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <segmentDelimiter>\r</segmentDelimiter>
+              </deserializationProperties>
+              <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+                <splitType>MSH_Segment</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+              <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+                <segmentDelimiter>\r</segmentDelimiter>
+                <successfulACKCode>AA</successfulACKCode>
+                <successfulACKMessage></successfulACKMessage>
+                <errorACKCode>AE</errorACKCode>
+                <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+                <rejectedACKCode>AR</rejectedACKCode>
+                <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+                <msh15ACKAccept>false</msh15ACKAccept>
+                <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+              </responseGenerationProperties>
+              <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+                <successfulACKCode>AA,CA</successfulACKCode>
+                <errorACKCode>AE,CE</errorACKCode>
+                <rejectedACKCode>AR,CR</rejectedACKCode>
+                <validateMessageControlId>true</validateMessageControlId>
+                <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+                <originalIdMapVariable></originalIdMapVariable>
+              </responseValidationProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+              <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+                <handleRepetitions>true</handleRepetitions>
+                <handleSubcomponents>true</handleSubcomponents>
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <stripNamespaces>true</stripNamespaces>
+                <segmentDelimiter>\r</segmentDelimiter>
+                <convertLineBreaks>true</convertLineBreaks>
+              </serializationProperties>
+              <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <segmentDelimiter>\r</segmentDelimiter>
+              </deserializationProperties>
+              <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+                <splitType>MSH_Segment</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+              <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+                <segmentDelimiter>\r</segmentDelimiter>
+                <successfulACKCode>AA</successfulACKCode>
+                <successfulACKMessage></successfulACKMessage>
+                <errorACKCode>AE</errorACKCode>
+                <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+                <rejectedACKCode>AR</rejectedACKCode>
+                <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+                <msh15ACKAccept>false</msh15ACKAccept>
+                <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+              </responseGenerationProperties>
+              <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+                <successfulACKCode>AA,CA</successfulACKCode>
+                <errorACKCode>AE,CE</errorACKCode>
+                <rejectedACKCode>AR,CR</rejectedACKCode>
+                <validateMessageControlId>true</validateMessageControlId>
+                <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+                <originalIdMapVariable></originalIdMapVariable>
+              </responseValidationProperties>
+            </outboundProperties>
+          </transformer>
+          <responseTransformer version="3.9.0">
+            <elements/>
+            <inboundDataType>HL7V2</inboundDataType>
+            <outboundDataType>HL7V2</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+              <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+                <handleRepetitions>true</handleRepetitions>
+                <handleSubcomponents>true</handleSubcomponents>
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <stripNamespaces>true</stripNamespaces>
+                <segmentDelimiter>\r</segmentDelimiter>
+                <convertLineBreaks>true</convertLineBreaks>
+              </serializationProperties>
+              <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <segmentDelimiter>\r</segmentDelimiter>
+              </deserializationProperties>
+              <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+                <splitType>MSH_Segment</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+              <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+                <segmentDelimiter>\r</segmentDelimiter>
+                <successfulACKCode>AA</successfulACKCode>
+                <successfulACKMessage></successfulACKMessage>
+                <errorACKCode>AE</errorACKCode>
+                <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+                <rejectedACKCode>AR</rejectedACKCode>
+                <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+                <msh15ACKAccept>false</msh15ACKAccept>
+                <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+              </responseGenerationProperties>
+              <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+                <successfulACKCode>AA,CA</successfulACKCode>
+                <errorACKCode>AE,CE</errorACKCode>
+                <rejectedACKCode>AR,CR</rejectedACKCode>
+                <validateMessageControlId>true</validateMessageControlId>
+                <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+                <originalIdMapVariable></originalIdMapVariable>
+              </responseValidationProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DataTypeProperties" version="3.9.0">
+              <serializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2SerializationProperties" version="3.9.0">
+                <handleRepetitions>true</handleRepetitions>
+                <handleSubcomponents>true</handleSubcomponents>
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <stripNamespaces>true</stripNamespaces>
+                <segmentDelimiter>\r</segmentDelimiter>
+                <convertLineBreaks>true</convertLineBreaks>
+              </serializationProperties>
+              <deserializationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2DeserializationProperties" version="3.9.0">
+                <useStrictParser>false</useStrictParser>
+                <useStrictValidation>false</useStrictValidation>
+                <segmentDelimiter>\r</segmentDelimiter>
+              </deserializationProperties>
+              <batchProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2BatchProperties" version="3.9.0">
+                <splitType>MSH_Segment</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+              <responseGenerationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseGenerationProperties" version="3.9.0">
+                <segmentDelimiter>\r</segmentDelimiter>
+                <successfulACKCode>AA</successfulACKCode>
+                <successfulACKMessage></successfulACKMessage>
+                <errorACKCode>AE</errorACKCode>
+                <errorACKMessage>An Error Occurred Processing Message.</errorACKMessage>
+                <rejectedACKCode>AR</rejectedACKCode>
+                <rejectedACKMessage>Message Rejected.</rejectedACKMessage>
+                <msh15ACKAccept>false</msh15ACKAccept>
+                <dateFormat>yyyyMMddHHmmss.SSS</dateFormat>
+              </responseGenerationProperties>
+              <responseValidationProperties class="com.mirth.connect.plugins.datatypes.hl7v2.HL7v2ResponseValidationProperties" version="3.9.0">
+                <successfulACKCode>AA,CA</successfulACKCode>
+                <errorACKCode>AE,CE</errorACKCode>
+                <rejectedACKCode>AR,CR</rejectedACKCode>
+                <validateMessageControlId>true</validateMessageControlId>
+                <originalMessageControlId>Destination_Encoded</originalMessageControlId>
+                <originalIdMapVariable></originalIdMapVariable>
+              </responseValidationProperties>
+            </outboundProperties>
+          </responseTransformer>
+          <filter version="3.9.0">
+            <elements/>
+          </filter>
+          <transportName>Channel Writer</transportName>
+          <mode>DESTINATION</mode>
+          <enabled>true</enabled>
+          <waitForPrevious>true</waitForPrevious>
+        </connector>
+      </destinationConnectors>
+      <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+      <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+      <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+      <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+      <properties version="3.9.0">
+        <clearGlobalChannelMap>true</clearGlobalChannelMap>
+        <messageStorageMode>DISABLED</messageStorageMode>
+        <encryptData>false</encryptData>
+        <removeContentOnCompletion>false</removeContentOnCompletion>
+        <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+        <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+        <initialState>STARTED</initialState>
+        <storeAttachments>false</storeAttachments>
+        <metaDataColumns>
+          <metaDataColumn>
+            <name>SOURCE</name>
+            <type>STRING</type>
+            <mappingName>mirth_source</mappingName>
+          </metaDataColumn>
+          <metaDataColumn>
+            <name>TYPE</name>
+            <type>STRING</type>
+            <mappingName>mirth_type</mappingName>
+          </metaDataColumn>
+        </metaDataColumns>
+        <attachmentProperties version="3.9.0">
+          <type>None</type>
+          <properties/>
+        </attachmentProperties>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+      </properties>
+      <exportData>
+        <metadata>
+          <enabled>true</enabled>
+          <lastModified>
+            <time>1602435684560</time>
+            <timezone>America/New_York</timezone>
+          </lastModified>
+          <pruningSettings>
+            <archiveEnabled>true</archiveEnabled>
+          </pruningSettings>
+        </metadata>
+        <codeTemplateLibraries/>
+      </exportData>
+    </channel>
+    <channel version="3.9.0">
+      <id>d4c7aa3a-6176-4a55-8463-97d0b27b140c</id>
+      <nextMetaDataId>2</nextMetaDataId>
+      <name>test</name>
+      <description></description>
+      <revision>6</revision>
+      <sourceConnector version="3.9.0">
+        <metaDataId>0</metaDataId>
+        <name>sourceConnector</name>
+        <properties class="com.mirth.connect.connectors.vm.VmReceiverProperties" version="3.9.0">
+          <pluginProperties/>
+          <sourceConnectorProperties version="3.9.0">
+            <responseVariable>None</responseVariable>
+            <respondAfterProcessing>true</respondAfterProcessing>
+            <processBatch>false</processBatch>
+            <firstResponse>false</firstResponse>
+            <processingThreads>1</processingThreads>
+            <resourceIds class="linked-hash-map">
+              <entry>
+                <string>Default Resource</string>
+                <string>[Default Resource]</string>
+              </entry>
+            </resourceIds>
+            <queueBufferSize>1000</queueBufferSize>
+          </sourceConnectorProperties>
+        </properties>
+        <transformer version="3.9.0">
+          <elements>
+            <com.mirth.connect.plugins.javascriptstep.JavaScriptStep version="3.9.0">
+              <sequenceNumber>0</sequenceNumber>
+              <enabled>true</enabled>
+              <script>msg = JSON.stringify(ChannelUtil.getChannelIds().toArray().map(id=&gt;({id: id, name: ChannelUtil.getChannelName(id)})),null,2)
+msg = JSON.stringify(getChannelNameIDMap(),null,2)</script>
+            </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
+          </elements>
+          <inboundTemplate encoding="base64"></inboundTemplate>
+          <outboundTemplate encoding="base64"></outboundTemplate>
+          <inboundDataType>RAW</inboundDataType>
+          <outboundDataType>RAW</outboundDataType>
+          <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </inboundProperties>
+          <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </outboundProperties>
+        </transformer>
+        <filter version="3.9.0">
+          <elements/>
+        </filter>
+        <transportName>Channel Reader</transportName>
+        <mode>SOURCE</mode>
+        <enabled>true</enabled>
+        <waitForPrevious>true</waitForPrevious>
+      </sourceConnector>
+      <destinationConnectors>
+        <connector version="3.9.0">
+          <metaDataId>1</metaDataId>
+          <name>Destination 1</name>
+          <properties class="com.mirth.connect.connectors.vm.VmDispatcherProperties" version="3.9.0">
+            <pluginProperties/>
+            <destinationConnectorProperties version="3.9.0">
+              <queueEnabled>false</queueEnabled>
+              <sendFirst>false</sendFirst>
+              <retryIntervalMillis>10000</retryIntervalMillis>
+              <regenerateTemplate>false</regenerateTemplate>
+              <retryCount>0</retryCount>
+              <rotate>false</rotate>
+              <includeFilterTransformer>false</includeFilterTransformer>
+              <threadCount>1</threadCount>
+              <threadAssignmentVariable></threadAssignmentVariable>
+              <validateResponse>false</validateResponse>
+              <resourceIds class="linked-hash-map">
+                <entry>
+                  <string>Default Resource</string>
+                  <string>[Default Resource]</string>
+                </entry>
+              </resourceIds>
+              <queueBufferSize>1000</queueBufferSize>
+              <reattachAttachments>true</reattachAttachments>
+            </destinationConnectorProperties>
+            <channelId>none</channelId>
+            <channelTemplate>${message.encodedData}</channelTemplate>
+            <mapVariables/>
+          </properties>
+          <transformer version="3.9.0">
+            <elements/>
+            <inboundDataType>RAW</inboundDataType>
+            <outboundDataType>RAW</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </transformer>
+          <responseTransformer version="3.9.0">
+            <elements/>
+            <inboundDataType>RAW</inboundDataType>
+            <outboundDataType>RAW</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </responseTransformer>
+          <filter version="3.9.0">
+            <elements/>
+          </filter>
+          <transportName>Channel Writer</transportName>
+          <mode>DESTINATION</mode>
+          <enabled>true</enabled>
+          <waitForPrevious>true</waitForPrevious>
+        </connector>
+      </destinationConnectors>
+      <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+      <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+      <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+      <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+      <properties version="3.9.0">
+        <clearGlobalChannelMap>true</clearGlobalChannelMap>
+        <messageStorageMode>DEVELOPMENT</messageStorageMode>
+        <encryptData>false</encryptData>
+        <removeContentOnCompletion>false</removeContentOnCompletion>
+        <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+        <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+        <initialState>STARTED</initialState>
+        <storeAttachments>true</storeAttachments>
+        <metaDataColumns>
+          <metaDataColumn>
+            <name>SOURCE</name>
+            <type>STRING</type>
+            <mappingName>mirth_source</mappingName>
+          </metaDataColumn>
+          <metaDataColumn>
+            <name>TYPE</name>
+            <type>STRING</type>
+            <mappingName>mirth_type</mappingName>
+          </metaDataColumn>
+        </metaDataColumns>
+        <attachmentProperties version="3.9.0">
+          <type>None</type>
+          <properties/>
+        </attachmentProperties>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+      </properties>
+      <exportData>
+        <metadata>
+          <enabled>true</enabled>
+          <lastModified>
+            <time>1602531689767</time>
+            <timezone>America/New_York</timezone>
+          </lastModified>
+          <pruningSettings>
+            <archiveEnabled>true</archiveEnabled>
+          </pruningSettings>
+        </metadata>
+        <codeTemplateLibraries>
+          <codeTemplateLibrary version="3.9.0">
+            <id>d382f981-c251-484d-86c5-bd76c56924c3</id>
+            <name>ChannelUtils</name>
+            <revision>5</revision>
+            <lastModified>
+              <time>1602548538651</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>8456e87d-530a-4c67-9cae-3b8cb2bcf144</id>
+                <name>getChannelNameIDMap</name>
+                <revision>3</revision>
+                <lastModified>
+                  <time>1602531752172</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>/**
+	Returns a channelID-to-channelName and channelName-to-channelID map.
+
+	@return {String} return description
+*/
+function getChannelNameIDMap() {
+	var map = {}
+	ChannelUtil.getChannelIds().toArray().forEach(id=&gt;{
+		var name = ChannelUtil.getChannelName(id)
+		map[id] = name
+		map[name] = id
+	})
+	return map
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+        </codeTemplateLibraries>
+      </exportData>
+    </channel>
+    <channel version="3.9.0">
+      <id>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</id>
+      <nextMetaDataId>2</nextMetaDataId>
+      <name>cpgp-healthcheck</name>
+      <description></description>
+      <revision>3</revision>
+      <sourceConnector version="3.9.0">
+        <metaDataId>0</metaDataId>
+        <name>sourceConnector</name>
+        <properties class="com.mirth.connect.connectors.vm.VmReceiverProperties" version="3.9.0">
+          <pluginProperties/>
+          <sourceConnectorProperties version="3.9.0">
+            <responseVariable>d1</responseVariable>
+            <respondAfterProcessing>true</respondAfterProcessing>
+            <processBatch>false</processBatch>
+            <firstResponse>false</firstResponse>
+            <processingThreads>1</processingThreads>
+            <resourceIds class="linked-hash-map">
+              <entry>
+                <string>Default Resource</string>
+                <string>[Default Resource]</string>
+              </entry>
+            </resourceIds>
+            <queueBufferSize>1000</queueBufferSize>
+          </sourceConnectorProperties>
+        </properties>
+        <transformer version="3.9.0">
+          <elements/>
+          <inboundDataType>RAW</inboundDataType>
+          <outboundDataType>RAW</outboundDataType>
+          <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </inboundProperties>
+          <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </outboundProperties>
+        </transformer>
+        <filter version="3.9.0">
+          <elements/>
+        </filter>
+        <transportName>Channel Reader</transportName>
+        <mode>SOURCE</mode>
+        <enabled>true</enabled>
+        <waitForPrevious>true</waitForPrevious>
+      </sourceConnector>
+      <destinationConnectors>
+        <connector version="3.9.0">
+          <metaDataId>1</metaDataId>
+          <name>cpgp</name>
+          <properties class="com.mirth.connect.connectors.http.HttpDispatcherProperties" version="3.9.0">
+            <pluginProperties/>
+            <destinationConnectorProperties version="3.9.0">
+              <queueEnabled>false</queueEnabled>
+              <sendFirst>false</sendFirst>
+              <retryIntervalMillis>10000</retryIntervalMillis>
+              <regenerateTemplate>false</regenerateTemplate>
+              <retryCount>0</retryCount>
+              <rotate>false</rotate>
+              <includeFilterTransformer>false</includeFilterTransformer>
+              <threadCount>1</threadCount>
+              <threadAssignmentVariable></threadAssignmentVariable>
+              <validateResponse>false</validateResponse>
+              <resourceIds class="linked-hash-map">
+                <entry>
+                  <string>Default Resource</string>
+                  <string>[Default Resource]</string>
+                </entry>
+              </resourceIds>
+              <queueBufferSize>1000</queueBufferSize>
+              <reattachAttachments>true</reattachAttachments>
+            </destinationConnectorProperties>
+            <host>http://cpgp:3000/healthcheck</host>
+            <useProxyServer>false</useProxyServer>
+            <proxyAddress></proxyAddress>
+            <proxyPort></proxyPort>
+            <method>get</method>
+            <headers class="linked-hash-map"/>
+            <parameters class="linked-hash-map"/>
+            <useHeadersVariable>false</useHeadersVariable>
+            <headersVariable></headersVariable>
+            <useParametersVariable>false</useParametersVariable>
+            <parametersVariable></parametersVariable>
+            <responseXmlBody>false</responseXmlBody>
+            <responseParseMultipart>true</responseParseMultipart>
+            <responseIncludeMetadata>false</responseIncludeMetadata>
+            <responseBinaryMimeTypes>application/.*(?&lt;!json|xml)$|image/.*|video/.*|audio/.*</responseBinaryMimeTypes>
+            <responseBinaryMimeTypesRegex>true</responseBinaryMimeTypesRegex>
+            <multipart>false</multipart>
+            <useAuthentication>false</useAuthentication>
+            <authenticationType>Basic</authenticationType>
+            <usePreemptiveAuthentication>false</usePreemptiveAuthentication>
+            <username></username>
+            <password></password>
+            <content></content>
+            <contentType>application/json</contentType>
+            <dataTypeBinary>false</dataTypeBinary>
+            <charset>UTF-8</charset>
+            <socketTimeout>30000</socketTimeout>
+          </properties>
+          <transformer version="3.9.0">
+            <elements/>
+            <inboundDataType>RAW</inboundDataType>
+            <outboundDataType>RAW</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </transformer>
+          <responseTransformer version="3.9.0">
+            <elements/>
+            <inboundDataType>RAW</inboundDataType>
+            <outboundDataType>RAW</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </responseTransformer>
+          <filter version="3.9.0">
+            <elements/>
+          </filter>
+          <transportName>HTTP Sender</transportName>
+          <mode>DESTINATION</mode>
+          <enabled>true</enabled>
+          <waitForPrevious>true</waitForPrevious>
+        </connector>
+      </destinationConnectors>
+      <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+      <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+      <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+      <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+      <properties version="3.9.0">
+        <clearGlobalChannelMap>true</clearGlobalChannelMap>
+        <messageStorageMode>DEVELOPMENT</messageStorageMode>
+        <encryptData>false</encryptData>
+        <removeContentOnCompletion>false</removeContentOnCompletion>
+        <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+        <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+        <initialState>STARTED</initialState>
+        <storeAttachments>true</storeAttachments>
+        <metaDataColumns>
+          <metaDataColumn>
+            <name>SOURCE</name>
+            <type>STRING</type>
+            <mappingName>mirth_source</mappingName>
+          </metaDataColumn>
+          <metaDataColumn>
+            <name>TYPE</name>
+            <type>STRING</type>
+            <mappingName>mirth_type</mappingName>
+          </metaDataColumn>
+        </metaDataColumns>
+        <attachmentProperties version="3.9.0">
+          <type>None</type>
+          <properties/>
+        </attachmentProperties>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+      </properties>
+      <exportData>
+        <metadata>
+          <enabled>true</enabled>
+          <lastModified>
+            <time>1602531939252</time>
+            <timezone>America/New_York</timezone>
+          </lastModified>
+          <pruningSettings>
+            <archiveEnabled>true</archiveEnabled>
+          </pruningSettings>
+        </metadata>
+        <codeTemplateLibraries/>
+      </exportData>
+    </channel>
+    <channel version="3.9.0">
+      <id>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</id>
+      <nextMetaDataId>2</nextMetaDataId>
+      <name>CodeTemplateTester</name>
+      <description>Example: {&quot;function&quot;: &quot;echo&quot;, &quot;params&quot;: &quot;pong&quot;}</description>
+      <revision>24</revision>
+      <sourceConnector version="3.9.0">
+        <metaDataId>0</metaDataId>
+        <name>sourceConnector</name>
+        <properties class="com.mirth.connect.connectors.http.HttpReceiverProperties" version="3.9.0">
+          <pluginProperties>
+            <com.mirth.connect.plugins.httpauth.NoneHttpAuthProperties version="3.9.0">
+  <authType>NONE</authType>
+            </com.mirth.connect.plugins.httpauth.NoneHttpAuthProperties>
+          </pluginProperties>
+          <listenerConnectorProperties version="3.9.0">
+            <host>0.0.0.0</host>
+            <port>5000</port>
+          </listenerConnectorProperties>
+          <sourceConnectorProperties version="3.9.0">
+            <responseVariable>d1</responseVariable>
+            <respondAfterProcessing>true</respondAfterProcessing>
+            <processBatch>false</processBatch>
+            <firstResponse>false</firstResponse>
+            <processingThreads>1</processingThreads>
+            <resourceIds class="linked-hash-map">
+              <entry>
+                <string>Default Resource</string>
+                <string>[Default Resource]</string>
+              </entry>
+            </resourceIds>
+            <queueBufferSize>1000</queueBufferSize>
+          </sourceConnectorProperties>
+          <xmlBody>false</xmlBody>
+          <parseMultipart>true</parseMultipart>
+          <includeMetadata>false</includeMetadata>
+          <binaryMimeTypes>application/.*(?&lt;!json|xml)$|image/.*|video/.*|audio/.*</binaryMimeTypes>
+          <binaryMimeTypesRegex>true</binaryMimeTypesRegex>
+          <responseContentType>application/json</responseContentType>
+          <responseDataTypeBinary>false</responseDataTypeBinary>
+          <responseStatusCode></responseStatusCode>
+          <responseHeaders class="linked-hash-map"/>
+          <responseHeadersVariable></responseHeadersVariable>
+          <useResponseHeadersVariable>false</useResponseHeadersVariable>
+          <charset>UTF-8</charset>
+          <contextPath></contextPath>
+          <timeout>30000</timeout>
+          <staticResources/>
+        </properties>
+        <transformer version="3.9.0">
+          <elements>
+            <com.mirth.connect.plugins.javascriptstep.JavaScriptStep version="3.9.0">
+              <sequenceNumber>0</sequenceNumber>
+              <enabled>true</enabled>
+              <script>$c(&apos;function&apos;,msg.function)
+$c(&apos;params&apos;,msg.params)</script>
+            </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
+          </elements>
+          <inboundTemplate encoding="base64"></inboundTemplate>
+          <outboundTemplate encoding="base64"></outboundTemplate>
+          <inboundDataType>JSON</inboundDataType>
+          <outboundDataType>JSON</outboundDataType>
+          <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </inboundProperties>
+          <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+            <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+              <splitType>JavaScript</splitType>
+              <batchScript></batchScript>
+            </batchProperties>
+          </outboundProperties>
+        </transformer>
+        <filter version="3.9.0">
+          <elements/>
+        </filter>
+        <transportName>HTTP Listener</transportName>
+        <mode>SOURCE</mode>
+        <enabled>true</enabled>
+        <waitForPrevious>true</waitForPrevious>
+      </sourceConnector>
+      <destinationConnectors>
+        <connector version="3.9.0">
+          <metaDataId>1</metaDataId>
+          <name>Test</name>
+          <properties class="com.mirth.connect.connectors.js.JavaScriptDispatcherProperties" version="3.9.0">
+            <pluginProperties/>
+            <destinationConnectorProperties version="3.9.0">
+              <queueEnabled>false</queueEnabled>
+              <sendFirst>false</sendFirst>
+              <retryIntervalMillis>10000</retryIntervalMillis>
+              <regenerateTemplate>false</regenerateTemplate>
+              <retryCount>0</retryCount>
+              <rotate>false</rotate>
+              <includeFilterTransformer>false</includeFilterTransformer>
+              <threadCount>1</threadCount>
+              <threadAssignmentVariable></threadAssignmentVariable>
+              <validateResponse>false</validateResponse>
+              <resourceIds class="linked-hash-map">
+                <entry>
+                  <string>Default Resource</string>
+                  <string>[Default Resource]</string>
+                </entry>
+              </resourceIds>
+              <queueBufferSize>1000</queueBufferSize>
+              <reattachAttachments>true</reattachAttachments>
+            </destinationConnectorProperties>
+            <script>try {
+	return JSON.stringify({result: this[$(&apos;function&apos;)]($(&apos;params&apos;))})
+} catch (e) {
+	return JSON.stringify({error: e.message, stack: e.stack})
+}
+
+</script>
+          </properties>
+          <transformer version="3.9.0">
+            <elements/>
+            <inboundTemplate encoding="base64"></inboundTemplate>
+            <outboundTemplate encoding="base64"></outboundTemplate>
+            <inboundDataType>JSON</inboundDataType>
+            <outboundDataType>JSON</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </transformer>
+          <responseTransformer version="3.9.0">
+            <elements/>
+            <inboundTemplate encoding="base64"></inboundTemplate>
+            <outboundTemplate encoding="base64"></outboundTemplate>
+            <inboundDataType>JSON</inboundDataType>
+            <outboundDataType>JSON</outboundDataType>
+            <inboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </inboundProperties>
+            <outboundProperties class="com.mirth.connect.plugins.datatypes.json.JSONDataTypeProperties" version="3.9.0">
+              <batchProperties class="com.mirth.connect.plugins.datatypes.json.JSONBatchProperties" version="3.9.0">
+                <splitType>JavaScript</splitType>
+                <batchScript></batchScript>
+              </batchProperties>
+            </outboundProperties>
+          </responseTransformer>
+          <filter version="3.9.0">
+            <elements/>
+          </filter>
+          <transportName>JavaScript Writer</transportName>
+          <mode>DESTINATION</mode>
+          <enabled>true</enabled>
+          <waitForPrevious>true</waitForPrevious>
+        </connector>
+      </destinationConnectors>
+      <preprocessingScript>// Modify the message variable below to pre process data
+return message;</preprocessingScript>
+      <postprocessingScript>// This script executes once after a message has been processed
+// Responses returned from here will be stored as &quot;Postprocessor&quot; in the response map
+return;</postprocessingScript>
+      <deployScript>// This script executes once when the channel is deployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</deployScript>
+      <undeployScript>// This script executes once when the channel is undeployed
+// You only have access to the globalMap and globalChannelMap here to persist data
+return;</undeployScript>
+      <properties version="3.9.0">
+        <clearGlobalChannelMap>true</clearGlobalChannelMap>
+        <messageStorageMode>DEVELOPMENT</messageStorageMode>
+        <encryptData>false</encryptData>
+        <removeContentOnCompletion>false</removeContentOnCompletion>
+        <removeOnlyFilteredOnCompletion>false</removeOnlyFilteredOnCompletion>
+        <removeAttachmentsOnCompletion>false</removeAttachmentsOnCompletion>
+        <initialState>STARTED</initialState>
+        <storeAttachments>true</storeAttachments>
+        <metaDataColumns>
+          <metaDataColumn>
+            <name>SOURCE</name>
+            <type>STRING</type>
+            <mappingName>mirth_source</mappingName>
+          </metaDataColumn>
+          <metaDataColumn>
+            <name>TYPE</name>
+            <type>STRING</type>
+            <mappingName>mirth_type</mappingName>
+          </metaDataColumn>
+        </metaDataColumns>
+        <attachmentProperties version="3.9.0">
+          <type>None</type>
+          <properties/>
+        </attachmentProperties>
+        <resourceIds class="linked-hash-map">
+          <entry>
+            <string>Default Resource</string>
+            <string>[Default Resource]</string>
+          </entry>
+        </resourceIds>
+      </properties>
+      <exportData>
+        <metadata>
+          <enabled>true</enabled>
+          <lastModified>
+            <time>1602546413843</time>
+            <timezone>America/New_York</timezone>
+          </lastModified>
+          <pruningSettings>
+            <archiveEnabled>true</archiveEnabled>
+          </pruningSettings>
+        </metadata>
+        <codeTemplateLibraries>
+          <codeTemplateLibrary version="3.9.0">
+            <id>d382f981-c251-484d-86c5-bd76c56924c3</id>
+            <name>ChannelUtils</name>
+            <revision>5</revision>
+            <lastModified>
+              <time>1602548538651</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>8456e87d-530a-4c67-9cae-3b8cb2bcf144</id>
+                <name>getChannelNameIDMap</name>
+                <revision>3</revision>
+                <lastModified>
+                  <time>1602531752172</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>/**
+	Returns a channelID-to-channelName and channelName-to-channelID map.
+
+	@return {String} return description
+*/
+function getChannelNameIDMap() {
+	var map = {}
+	ChannelUtil.getChannelIds().toArray().forEach(id=&gt;{
+		var name = ChannelUtil.getChannelName(id)
+		map[id] = name
+		map[name] = id
+	})
+	return map
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+          <codeTemplateLibrary version="3.9.0">
+            <id>02386f09-a41f-4c3e-bd8a-d4c3a8056ede</id>
+            <name>ConnectPGPool</name>
+            <revision>8</revision>
+            <lastModified>
+              <time>1602548538647</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>5a249510-935e-4653-9af1-5b51b8bf2341</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>3e46d1bd-9c65-4ac6-b032-48245b40d621</id>
+                <name>cpgpExecute</name>
+                <revision>21</revision>
+                <lastModified>
+                  <time>1602551819586</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>if (typeof cpgpLibs === &apos;undefined&apos;) cpgpLibs = {}
+cpgpLibs.HttpClientBuilder = Packages.org.apache.http.impl.client.HttpClientBuilder
+cpgpLibs.HttpPost = Packages.org.apache.http.client.methods.HttpPost
+cpgpLibs.EntityUtils = Packages.org.apache.http.util.EntityUtils
+
+/**
+	Modify the description here. Modify the function name and parameters as needed. One function per
+	template is recommended; create a new code template for each new function.
+
+	@param {String} secret - secret key
+	@param {String} url - ConnectPGPool URL - for example http://cpgp:3000
+	@param {String} action - query/exec/execOne
+	@param {String} query - sql statement to run
+	@param {Array} params - sql params
+	@return {Object} returns sql result or error
+*/
+function cpgpExecute(args) {
+	var client = new cpgpLibs.HttpClientBuilder.create().build()
+	var url = args.url + &apos;/api/&apos; + args.action
+	var httpPost = new cpgpLibs.HttpPost(url)
+	var body = JSON.stringify({query: args.query, params: args.params || []})
+	var request = cpgpCreateRequest(args)
+	
+	httpPost.setHeader(&quot;Content-type&quot;, &quot;application/json&quot;)
+	httpPost.setHeader(&quot;X-Signature&quot;, cpgpCreateSignature({secret: args.secret, nonce: request.nonce, text: body}))
+	httpPost.setHeader(&quot;X-Request-ID&quot;, request.requestId)
+	httpPost.setHeader(&quot;X-nonce&quot;, request.nonce)
+	httpPost.setEntity(new StringEntity(body))
+
+	try {
+		return JSON.parse(cpgpLibs.EntityUtils.toString(client.execute(httpPost).getEntity(), &quot;UTF-8&quot;).trim())
+	} catch (e) {
+		return e
+	}
+}</code>
+                </properties>
+              </codeTemplate>
+              <codeTemplate version="3.9.0">
+                <id>f951adb6-46da-459f-a800-1101440ee5ed</id>
+                <name>cpgpGetClient</name>
+                <revision>1</revision>
+                <lastModified>
+                  <time>1602547914090</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>/**
+	Returns a Connect PGPool Client
+
+	@param {String} url - ConnectPGPool URL - for example http://cpgp:3000
+	@param {String} secret - preshared secret
+	@return {String} return description
+*/
+function cpgpGetClient(url, secret) {
+	return {
+		query: (args)=&gt;cpgpExecute({url: url, secret: secret, action: &apos;query&apos;, query: args.query, params: args.params}),
+		exec: (args)=&gt;cpgpExecute({url: url, secret: secret, action: &apos;exec&apos;, query: args.query, params: args.params}),
+		execOne: (args)=&gt;cpgpExecute({url: url, secret: secret, action: &apos;execOne&apos;, query: args.query, params: args.params}),	
+	}
+}</code>
+                </properties>
+              </codeTemplate>
+              <codeTemplate version="3.9.0">
+                <id>8d88b3e9-af46-46f8-b3d5-eee05ec30702</id>
+                <name>createRequest</name>
+                <revision>10</revision>
+                <lastModified>
+                  <time>1602547914046</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>if (typeof cpgpLibs === &apos;undefined&apos;) cpgpLibs = {}
+cpgpLibs.HttpClientBuilder = Packages.org.apache.http.impl.client.HttpClientBuilder
+cpgpLibs.HttpGet = Packages.org.apache.http.client.methods.HttpGet
+cpgpLibs.EntityUtils = Packages.org.apache.http.util.EntityUtils
+
+
+/**
+	Modify the description here. Modify the function name and parameters as needed. One function per
+	template is recommended; create a new code template for each new function.
+
+	@param {String} url - ConnectPGPool URL - for example http://localhost:3000
+	@return {Object} returns {requestId, nonce}
+*/
+function cpgpCreateRequest(params) {
+	var client = new cpgpLibs.HttpClientBuilder.create().build()
+	var url = params.url + &apos;/auth/request&apos;
+	var httpGet = new cpgpLibs.HttpGet(url)
+
+	try {
+		return JSON.parse(cpgpLibs.EntityUtils.toString(client.execute(httpGet).getEntity(), &quot;UTF-8&quot;).trim())
+	} catch (e) {
+		return e
+	}
+}</code>
+                </properties>
+              </codeTemplate>
+              <codeTemplate version="3.9.0">
+                <id>5801f535-70ef-4cd6-a177-0d6517dae3ad</id>
+                <name>createSignature</name>
+                <revision>6</revision>
+                <lastModified>
+                  <time>1602551819602</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>if (typeof cpgpLibs === &apos;undefined&apos;) cpgpLibs = {}
+cpgpLibs.Mac = Packages.javax.crypto.Mac
+cpgpLibs.SecretKeySpec = Packages.javax.crypto.spec.SecretKeySpec
+cpgpLibs.StandardCharsets = Packages.java.nio.charset.StandardCharsets
+
+const HMAC_SHA512 = &quot;HmacSHA512&quot;
+const getBytes = (val) =&gt; Packages.java.lang.String(val).getBytes(cpgpLibs.StandardCharsets.UTF_8)
+
+/**
+	Creates a Connect PGPool crypto signature
+
+	@param {String} key - secret key
+	@param {String} nonce - onetime nonce
+	@return {String} return Base64 sha512 signature
+*/
+function cpgpCreateSignature(params) {
+     var byteKey = getBytes(params.secret)
+     var sha512Hmac = cpgpLibs.Mac.getInstance(HMAC_SHA512)
+     sha512Hmac.init(new cpgpLibs.SecretKeySpec(byteKey, HMAC_SHA512))
+     var macData = sha512Hmac.doFinal(getBytes(params.nonce + params.text))
+     	logger.info(&apos;params.nonce: &apos; + params.nonce +  &apos; params.text: &apos; + params.text + &apos; secret: &apos; + params.secret)
+     return Packages.java.util.Base64.getEncoder().encodeToString(macData)
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+          <codeTemplateLibrary version="3.9.0">
+            <id>40e45a67-d4d0-4f83-8892-26f8f0ad1cbd</id>
+            <name>Crypto</name>
+            <revision>5</revision>
+            <lastModified>
+              <time>1602548538645</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>5a249510-935e-4653-9af1-5b51b8bf2341</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>0ffee4cf-52ce-4cdc-9fed-25227a55c617</id>
+                <name>sha256Hash</name>
+                <revision>1</revision>
+                <lastModified>
+                  <time>1602535591334</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>/**
+	Modify the description here. Modify the function name and parameters as needed. One function per
+	template is recommended; create a new code template for each new function.
+
+	@param {String} arg1 - arg1 description
+	@return {String} return description
+*/
+function sha256Hash(text) {
+	return com.google.common.hash.Hashing.sha256().hashUnencodedChars(JSON.stringify(text))
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+          <codeTemplateLibrary version="3.9.0">
+            <id>128794cd-83c2-40c8-a39f-21400456220f</id>
+            <name>TestUtils</name>
+            <revision>6</revision>
+            <lastModified>
+              <time>1602548538649</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <description></description>
+            <includeNewChannels>false</includeNewChannels>
+            <enabledChannelIds>
+              <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+              <string>0a57a2bf-346f-4519-b4ca-0436aeeb2ea5</string>
+            </enabledChannelIds>
+            <disabledChannelIds>
+              <string>687be862-0186-4c4f-adf8-167df5255fab</string>
+              <string>d4edf57b-e868-41ca-9b12-1ac51b2d6530</string>
+              <string>220a84de-344c-44df-8929-7dc52ca0caaf</string>
+              <string>1eaf2a13-b69c-4557-9333-02f6c0420c11</string>
+              <string>d4c7aa3a-6176-4a55-8463-97d0b27b140c</string>
+              <string>3f1d55fc-81a4-4999-aa92-94e05f5d2af3</string>
+            </disabledChannelIds>
+            <codeTemplates>
+              <codeTemplate version="3.9.0">
+                <id>06d88223-4f9e-41fd-bef3-8a1d59c55f95</id>
+                <name>echo</name>
+                <revision>1</revision>
+                <lastModified>
+                  <time>1602442416450</time>
+                  <timezone>Etc/UTC</timezone>
+                </lastModified>
+                <contextSet>
+                  <delegate>
+                    <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                    <contextType>DESTINATION_DISPATCHER</contextType>
+                    <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                    <contextType>SOURCE_RECEIVER</contextType>
+                    <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                  </delegate>
+                </contextSet>
+                <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+                  <type>FUNCTION</type>
+                  <code>function echo(val) {
+	return val
+}</code>
+                </properties>
+              </codeTemplate>
+            </codeTemplates>
+          </codeTemplateLibrary>
+        </codeTemplateLibraries>
+      </exportData>
+    </channel>
+  </channels>
+</channelGroup>
