@@ -1,8 +1,9 @@
 const fetch = require('node-fetch')
-const MIRTH_HOST = process.env.MIRTH_HOST || 'localhost'
+const findMirth = require('./findMirth')
+let mirthHost = process.env.MIRTH_HOST || 'localhost'
 
-beforeAll(() => {
-
+beforeAll(async () => {
+    mirthHost = await findMirth()
 })
 describe('channel: TestInterface', () => {
     it(`should return ok`, async () => {
@@ -30,7 +31,7 @@ describe('channel: TestInterface', () => {
 `
 
         let body = testCode.trim()
-        let result = await fetch(`http://${MIRTH_HOST}:5000`, {method: 'POST', body, headers: {"content-type": "script/javascript"}}).then(res => res.json())
+        let result = await fetch(`http://${mirthHost}:5000`, {method: 'POST', body, headers: {"content-type": "script/javascript"}}).then(res => res.json())
         expect(result).toEqual({"result": "ok"})
     })
 })
