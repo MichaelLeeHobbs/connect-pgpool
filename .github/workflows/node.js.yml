@@ -34,15 +34,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: |
-        yarn install
-        yarn build:test
-        yarn start:github
-        docker ps
-        docker logs dockerfiles_mirth_1
-        sleep 30
-        curl http://localhost:8080
-        docker logs dockerfiles_mirth_1
-        yarn setupMirth:container
-        docker ps
-        yarn test:container
+    - run: yarn install
+    - run: yarn build:test
+    - run: yarn start:github
+    - run: MIRTH_HOST=mirth && yarn setupMirth
+    - run: MIRTH_HOST=mirth && yarn test

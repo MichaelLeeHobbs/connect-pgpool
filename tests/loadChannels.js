@@ -1,4 +1,3 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
 const fs = require('fs')
 const path = require('path')
 const fetch = require('node-fetch')
@@ -31,6 +30,10 @@ const loadChannels = async (mirthHost)=> {
                 .then(res=>res.text())
                 .then((res)=>console.log('Start TestInterface results: ', res))
                 .catch((e)=>console.error('Start TestInterface error: ', e))
+        })
+        .catch(e=>{
+            console.error('Error while loading/deploying channels!', e)
+            throw e
         })
 }
 
