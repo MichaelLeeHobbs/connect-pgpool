@@ -8,11 +8,14 @@ const checkMirth = async (mirthHost) => {
     }).catch(() => false)
 }
 
-const main = async () => {
+const sleep = async (ms = 1) => new Promise(resolve => setTimeout(resolve, ms))
+const main = async (attempts = 0, maxAttempts = 30, sleepMS = 2000) => {
     if ((await checkMirth(MIRTH_HOST))) return MIRTH_HOST
     if ((await checkMirth('localhost'))) return 'localhost'
     if ((await checkMirth('mirth'))) return 'mirth'
-    return MIRTH_HOST
+    if (attempts > maxAttempts) throw new Error(`Could not find a Mirth container! Giving up after ${maxAttempts} attempts!`)
+    await sleep(sleepMS)
+    return main(++attempts, maxAttempts, sleepMS)
 }
 
 module.exports = main
