@@ -26,5 +26,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn install
     - run: yarn build
-    - run: yarn start:dev
+    - run: yarn start:github
+    - run: yarn setupMirth
     - run: yarn test
