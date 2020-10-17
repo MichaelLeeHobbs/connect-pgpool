@@ -29,6 +29,7 @@ jobs:
           **/node_modules
           **/.cache/yarn
           /usr/local/share/.cache/yarn
+          /var/lib/docker/overlay2
         key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
