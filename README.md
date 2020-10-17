@@ -163,4 +163,4 @@ msg = {
     * [ ] Add support for other types of SQL Databases.
     * [ ] Add support for plugins.
     * [x] Run test inside a container to see if this fixes the issue with them failing on github
-    * [ ] Cache container images on github to speed up build time. May not be possiable
+    * [ ] Cache container images on github to speed up build time. May not be possiable?
