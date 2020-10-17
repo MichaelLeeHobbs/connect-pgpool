@@ -7,11 +7,13 @@
     "pg": "^8.4.1"
   },
   "scripts": {
-    "build": "docker build -t connect-pgpool .",
-    "build:start": "docker build -t connect-pgpool . && docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d",
+    "build": "docker build -f ./dockerFiles/Dockerfile -t connect-pgpool .",
+    "build:start": "docker build -t connect-pgpool . && docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.dev.yml up -d",
     "start": "node src/index",
-    "start:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d",
-    "stop:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml down",
+    "start:dev": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.dev.yml up -d",
+    "start:github": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.github.yml up -d",
+    "stop:dev": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.dev.yml down",
+    "setupMirth": "node tests/setupMirth.js",
     "test": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 jest"
   },
   "devDependencies": {

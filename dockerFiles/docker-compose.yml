@@ -51,38 +51,8 @@ services:
     networks:
       - db
 
-  pgadmin:
-    image: dpage/pgadmin4:4.26
-    volumes:
-      #- "/efs/volumes/pgadmin:/root/.pgadmin:rw"
-      - mirth-pgadimn-data:/root/.pgadmin
-    ports:
-      - "8081:80"
-      - "8444:443"
-    deploy:
-      resources:
-        limits:
-          cpus: '0.20'
-          memory: 512M
-      restart_policy:
-        condition: "any"
-      replicas: 1
-      update_config:
-        parallelism: 1
-        failure_action: rollback
-    networks:
-      - db
-
-  db-pgwatch2-configdb:
-    image: cybertec/pgwatch2-postgres:latest
-    ports:
-      - "3000:3000"
-      - "8082:8080"
-    networks:
-      - db
-
   cpgp:
-    image: michaelleehobbs/connect-pgpool:0.1.1
+    image: michaelleehobbs/connect-pgpool
     deploy:
       resources:
         limits:

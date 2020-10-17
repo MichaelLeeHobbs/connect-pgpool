@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  postgres:
+    env_file: ../env/pg.dev.env
+  mirth:
+    env_file: ../env/mirth.dev.env
+  cpgp:
+    image: connect-pgpool:latest
+    env_file: ../env/cpgp.dev.env
+
