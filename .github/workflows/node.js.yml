@@ -38,8 +38,9 @@ jobs:
         yarn install
         yarn build:test
         yarn start:github
+        docker ps
         docker logs dockerfiles_mirth_1
-        curl --insecure https://localhost:8443
+        curl http://localhost:8080
         docker logs dockerfiles_mirth_1
         yarn setupMirth:container
         docker ps
