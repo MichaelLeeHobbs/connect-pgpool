@@ -40,6 +40,7 @@ jobs:
         yarn start:github
         docker ps
         docker logs dockerfiles_mirth_1
+        sleep 30
         curl http://localhost:8080
         docker logs dockerfiles_mirth_1
         yarn setupMirth:container
