@@ -15,9 +15,9 @@
     "start:github": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.github.yml up -d",
     "stop:dev": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.dev.yml down",
     "setupMirth": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 node --trace-warnings tests/setupMirth.js",
-    "setupMirth:action": "docker exec dockerFiles_cpgp_1 export MIRTH_HOST=mirth && export NODE_TLS_REJECT_UNAUTHORIZED=0 && tests/setupMirth.js",
+    "setupMirth:action": "docker exec dockerfiles_cpgp_1 export MIRTH_HOST=mirth && export NODE_TLS_REJECT_UNAUTHORIZED=0 && tests/setupMirth.js",
     "test": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 jest",
-    "test:action": "docker exec dockerFiles_cpgp_1 export MIRTH_HOST=mirth && export NODE_TLS_REJECT_UNAUTHORIZED=0 && node tests/setupMirth.js"
+    "test:action": "docker exec dockerfiles_cpgp_1 export MIRTH_HOST=mirth && export NODE_TLS_REJECT_UNAUTHORIZED=0 && node tests/setupMirth.js"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
