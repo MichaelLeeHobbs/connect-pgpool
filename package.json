@@ -8,13 +8,16 @@
   },
   "scripts": {
     "build": "docker build -f ./dockerFiles/Dockerfile -t connect-pgpool .",
-    "build:start": "docker build -t connect-pgpool . && docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.dev.yml up -d",
+    "build:test": "docker build -f ./dockerFiles/Dockerfile.test -t connect-pgpool .",
+    "build:dev:start": "docker build -f ./dockerFiles/Dockerfile.test -t connect-pgpool . && docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.dev.yml up -d",
     "start": "node src/index",
     "start:dev": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.dev.yml up -d",
     "start:github": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.github.yml up -d",
     "stop:dev": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.dev.yml down",
     "setupMirth": "node tests/setupMirth.js",
-    "test": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 jest"
+    "test": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 jest",
+    "test:container": "docker exec -it dockerfiles_cpgp_1 yarn test:inside",
+    "test:inside": "cross-env MIRTH_HOST=mirth NODE_TLS_REJECT_UNAUTHORIZED=0 jest"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",

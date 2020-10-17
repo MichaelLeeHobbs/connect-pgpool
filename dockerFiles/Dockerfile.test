@@ -2,8 +2,11 @@ FROM node:14.13.1-alpine
 
 WORKDIR /usr/src/app
 COPY package* ./
-RUN yarn install --force --production
+RUN yarn install --force
 COPY src src
+COPY tests tests
+COPY .jest .jest
+COPY channels channels
 
 ENV NPM_CONFIG_LOGLEVEL info
 USER node
