@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const findMirth = require('./findMirth')
-let mirthHost = process.env.MIRTH_HOST || 'localhost'
+let mirthHost = process.env.MIRTH_HOST
 
 beforeAll(async () => {
     mirthHost = await findMirth()

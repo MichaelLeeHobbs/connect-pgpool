@@ -38,5 +38,6 @@ jobs:
     - run: yarn install
     - run: yarn build:test
     - run: yarn start:github
+    - run: MIRTH_HOST=$(yarn findMirth)
     - run: yarn setupMirth:action
     - run: yarn test:action
