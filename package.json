@@ -15,6 +15,8 @@
     "start:github": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.github.yml up -d",
     "stop:dev": "docker-compose -f dockerFiles/docker-compose.yml -f dockerFiles/docker-compose.dev.yml down",
     "setupMirth": "node tests/setupMirth.js",
+    "setupMirth:container": "docker exec -it dockerfiles_cpgp_1 yarn setupMirth:inside",
+    "setupMirth:inside": "cross-env MIRTH_HOST=mirth node tests/setupMirth.js",
     "test": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 jest",
     "test:container": "docker exec -it dockerfiles_cpgp_1 yarn test:inside",
     "test:inside": "cross-env MIRTH_HOST=mirth NODE_TLS_REJECT_UNAUTHORIZED=0 jest"

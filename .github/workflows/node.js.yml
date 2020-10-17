@@ -39,6 +39,6 @@ jobs:
         yarn build:test
         yarn start:github
         sleep 10
-        yarn setupMirth
+        yarn setupMirth:container
         docker ps
         yarn test:container
