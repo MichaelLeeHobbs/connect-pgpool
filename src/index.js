@@ -40,6 +40,8 @@ app.post('/api/:action', (req, res) => {
         })
 })
 
+// app.use('/plugin/test', require('./plugins/test'))
+
 http.listen(CONFIG.PORT, function () {
     console.log(`listening on *:${CONFIG.PORT}`)
 })

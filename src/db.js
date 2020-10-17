@@ -31,8 +31,11 @@ class DB {
         return new Promise(((resolve, reject) => {
             // to run a query we can acquire a client from the pool,
             // run a query on the client, and then return the client to the pool
-            this.pool.connect(function (err, client, done) {
-                if (err) reject(err)
+            this.pool.connect((err, client, done) => {
+                if (err) return reject(err)
+                console.log('client?', client, err)
+                if (!client) return reject(`Could not get client from pool!`)
+                console.log('client?', client)
                 client.query(query, params, function (err, result) {
                     done()//call `done()` to release the client back to the pool
                     if (err) {
