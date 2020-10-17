@@ -1,9 +1,9 @@
 <channel version="3.9.0">
   <id>3d194c52-0c93-4104-95cb-c4c2baaa8f85</id>
-  <nextMetaDataId>2</nextMetaDataId>
+  <nextMetaDataId>3</nextMetaDataId>
   <name>TestInterface</name>
   <description>Example: ()=&gt;1+1</description>
-  <revision>2</revision>
+  <revision>4</revision>
   <sourceConnector version="3.9.0">
     <metaDataId>0</metaDataId>
     <name>sourceConnector</name>
@@ -18,7 +18,7 @@
         <port>5000</port>
       </listenerConnectorProperties>
       <sourceConnectorProperties version="3.9.0">
-        <responseVariable>d1</responseVariable>
+        <responseVariable>d2</responseVariable>
         <respondAfterProcessing>true</respondAfterProcessing>
         <processBatch>false</processBatch>
         <firstResponse>false</firstResponse>
@@ -151,6 +151,77 @@
       </filter>
       <transportName>JavaScript Writer</transportName>
       <mode>DESTINATION</mode>
+      <enabled>false</enabled>
+      <waitForPrevious>true</waitForPrevious>
+    </connector>
+    <connector version="3.9.0">
+      <metaDataId>2</metaDataId>
+      <name>TestRunner</name>
+      <properties class="com.mirth.connect.connectors.vm.VmDispatcherProperties" version="3.9.0">
+        <pluginProperties/>
+        <destinationConnectorProperties version="3.9.0">
+          <queueEnabled>false</queueEnabled>
+          <sendFirst>false</sendFirst>
+          <retryIntervalMillis>10000</retryIntervalMillis>
+          <regenerateTemplate>false</regenerateTemplate>
+          <retryCount>0</retryCount>
+          <rotate>false</rotate>
+          <includeFilterTransformer>false</includeFilterTransformer>
+          <threadCount>1</threadCount>
+          <threadAssignmentVariable></threadAssignmentVariable>
+          <validateResponse>false</validateResponse>
+          <resourceIds class="linked-hash-map">
+            <entry>
+              <string>Default Resource</string>
+              <string>[Default Resource]</string>
+            </entry>
+          </resourceIds>
+          <queueBufferSize>1000</queueBufferSize>
+          <reattachAttachments>true</reattachAttachments>
+        </destinationConnectorProperties>
+        <channelId>ac780bfa-1a27-4d37-ba85-5d57c1a4bfdd</channelId>
+        <channelTemplate>${message.encodedData}</channelTemplate>
+        <mapVariables/>
+      </properties>
+      <transformer version="3.9.0">
+        <elements/>
+        <inboundDataType>RAW</inboundDataType>
+        <outboundDataType>RAW</outboundDataType>
+        <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+          <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+            <splitType>JavaScript</splitType>
+            <batchScript></batchScript>
+          </batchProperties>
+        </inboundProperties>
+        <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+          <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+            <splitType>JavaScript</splitType>
+            <batchScript></batchScript>
+          </batchProperties>
+        </outboundProperties>
+      </transformer>
+      <responseTransformer version="3.9.0">
+        <elements/>
+        <inboundDataType>RAW</inboundDataType>
+        <outboundDataType>RAW</outboundDataType>
+        <inboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+          <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+            <splitType>JavaScript</splitType>
+            <batchScript></batchScript>
+          </batchProperties>
+        </inboundProperties>
+        <outboundProperties class="com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties" version="3.9.0">
+          <batchProperties class="com.mirth.connect.plugins.datatypes.raw.RawBatchProperties" version="3.9.0">
+            <splitType>JavaScript</splitType>
+            <batchScript></batchScript>
+          </batchProperties>
+        </outboundProperties>
+      </responseTransformer>
+      <filter version="3.9.0">
+        <elements/>
+      </filter>
+      <transportName>Channel Writer</transportName>
+      <mode>DESTINATION</mode>
       <enabled>true</enabled>
       <waitForPrevious>true</waitForPrevious>
     </connector>
@@ -202,12 +273,173 @@ return;</undeployScript>
     <metadata>
       <enabled>true</enabled>
       <lastModified>
-        <time>1602893248741</time>
+        <time>1602933834194</time>
         <timezone>America/New_York</timezone>
       </lastModified>
       <pruningSettings>
         <archiveEnabled>true</archiveEnabled>
       </pruningSettings>
     </metadata>
+    <codeTemplateLibraries>
+      <codeTemplateLibrary version="3.9.0">
+        <id>06ce8ec8-bc85-4fc2-88bd-2b08457411dc</id>
+        <name>ConnectPGPool</name>
+        <revision>3</revision>
+        <lastModified>
+          <time>1602933625374</time>
+          <timezone>Etc/UTC</timezone>
+        </lastModified>
+        <description></description>
+        <includeNewChannels>false</includeNewChannels>
+        <enabledChannelIds>
+          <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+          <string>52f774ab-a3aa-44cd-93ca-66363d59b10f</string>
+        </enabledChannelIds>
+        <disabledChannelIds/>
+        <codeTemplates>
+          <codeTemplate version="3.9.0">
+            <id>384066e7-6639-43da-904f-3539c89638f3</id>
+            <name>cpgp</name>
+            <revision>2</revision>
+            <lastModified>
+              <time>1602933554065</time>
+              <timezone>Etc/UTC</timezone>
+            </lastModified>
+            <contextSet>
+              <delegate>
+                <contextType>SOURCE_RECEIVER</contextType>
+                <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+                <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+                <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+                <contextType>DESTINATION_DISPATCHER</contextType>
+              </delegate>
+            </contextSet>
+            <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+              <type>COMPILED_CODE</type>
+              <code>/**
+ cpgp.getClient(url, secret)
+ client.query({query: &apos;sql&apos;, params: []})
+ client.exec({query: &apos;sql&apos;, params: []})
+ client.execOne({query: &apos;sql&apos;, params: []})
+*/
+
+const {HttpClientBuilder} = Packages.org.apache.http.impl.client
+const {HttpGet, HttpPost} = Packages.org.apache.http.client.methods
+const {EntityUtils} = Packages.org.apache.http.util
+const {Mac, spec: {SecretKeySpec}} = Packages.javax.crypto
+const {StandardCharsets} = Packages.java.nio.charset
+const {StringEntity} = Packages.org.apache.http.entity
+
+/**
+ Modify the description here. Modify the function name and parameters as needed. One function per
+ template is recommended; create a new code template for each new function.
+
+ @param {String} secret - secret key
+ @param {String} url - ConnectPGPool URL - for example http://cpgp:3000
+ @param {String} action - query/exec/execOne
+ @param {String} query - sql statement to run
+ @param {Array} params - sql params
+ @return {Object} returns sql result or error
+*/
+function cpgpExecute(args) {
+    var client = new HttpClientBuilder.create().build()
+    var url = args.url + &apos;/api/&apos; + args.action
+    var httpPost = new HttpPost(url)
+    var body = JSON.stringify({query: args.query, params: args.params || []})
+    var request = cpgpCreateRequest(args)
+
+    httpPost.setHeader(&quot;Content-type&quot;, &quot;application/json&quot;)
+    httpPost.setHeader(&quot;X-Signature&quot;, cpgpCreateSignature({secret: args.secret, nonce: request.nonce, text: body}))
+    httpPost.setHeader(&quot;X-Request-ID&quot;, request.requestId)
+    httpPost.setHeader(&quot;X-nonce&quot;, request.nonce)
+    httpPost.setEntity(new StringEntity(body))
+
+    try {
+        return JSON.parse(EntityUtils.toString(client.execute(httpPost).getEntity(), &quot;UTF-8&quot;).trim())
+    } catch (e) {
+        return e
+    }
+}
+
+/**
+ Modify the description here. Modify the function name and parameters as needed. One function per
+ template is recommended; create a new code template for each new function.
+
+ @param {String} url - ConnectPGPool URL - for example http://localhost:3000
+ @return {Object} returns {requestId, nonce}
+ */
+function cpgpCreateRequest(params) {
+    var client = new HttpClientBuilder.create().build()
+    var url = params.url + &apos;/auth/request&apos;
+    var httpGet = new HttpGet(url)
+
+    try {
+        return JSON.parse(EntityUtils.toString(client.execute(httpGet).getEntity(), &quot;UTF-8&quot;).trim())
+    } catch (e) {
+        return e
+    }
+}
+
+const HMAC_SHA512 = &quot;HmacSHA512&quot;
+const getBytes = (val) =&gt; Packages.java.lang.String(val).getBytes(StandardCharsets.UTF_8)
+
+/**
+ Creates a Connect PGPool crypto signature
+
+ @param {String} key - secret key
+ @param {String} nonce - onetime nonce
+ @return {String} return Base64 sha512 signature
+ */
+function cpgpCreateSignature(params) {
+    var byteKey = getBytes(params.secret)
+    var sha512Hmac = Mac.getInstance(HMAC_SHA512)
+    sha512Hmac.init(new SecretKeySpec(byteKey, HMAC_SHA512))
+    var macData = sha512Hmac.doFinal(getBytes(params.nonce + params.text))
+    return Packages.java.util.Base64.getEncoder().encodeToString(macData)
+}
+
+/**
+ Returns a Connect PGPool Client
+
+ @param {String} url - ConnectPGPool URL - for example http://cpgp:3000
+ @param {String} secret - preshared secret
+ @return {String} return description
+ */
+function cpgpGetClient(url, secret) {
+    return {
+        query: (args)=&gt;cpgpExecute({url: url, secret: secret, action: &apos;query&apos;, query: args.query, params: args.params}),
+        exec: (args)=&gt;cpgpExecute({url: url, secret: secret, action: &apos;exec&apos;, query: args.query, params: args.params}),
+        execOne: (args)=&gt;cpgpExecute({url: url, secret: secret, action: &apos;execOne&apos;, query: args.query, params: args.params}),
+    }
+}
+
+
+const cpgp = {
+    getClient: cpgpGetClient,
+}
+</code>
+            </properties>
+          </codeTemplate>
+        </codeTemplates>
+      </codeTemplateLibrary>
+      <codeTemplateLibrary version="3.9.0">
+        <id>aa9e9789-4dd0-4f33-97f2-fb758d7b1935</id>
+        <name>TestFrameWork</name>
+        <revision>3</revision>
+        <lastModified>
+          <time>1602933625377</time>
+          <timezone>Etc/UTC</timezone>
+        </lastModified>
+        <description></description>
+        <includeNewChannels>false</includeNewChannels>
+        <enabledChannelIds>
+          <string>3d194c52-0c93-4104-95cb-c4c2baaa8f85</string>
+        </enabledChannelIds>
+        <disabledChannelIds>
+          <string>52f774ab-a3aa-44cd-93ca-66363d59b10f</string>
+        </disabledChannelIds>
+        <codeTemplates/>
+      </codeTemplateLibrary>
+    </codeTemplateLibraries>
   </exportData>
 </channel>
