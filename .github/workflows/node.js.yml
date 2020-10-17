@@ -22,14 +22,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: Cache multiple paths
       uses: actions/cache@v2
-        with:
-          path: |
-            ~/cache
-            !~/cache/exclude
-            **/node_modules
-            **/.cache/yarn
-            /usr/local/share/.cache/yarn
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+      with:
+        path: |
+          ~/cache
+          !~/cache/exclude
+          **/node_modules
+          **/.cache/yarn
+          /usr/local/share/.cache/yarn
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:

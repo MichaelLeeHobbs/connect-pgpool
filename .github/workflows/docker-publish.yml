@@ -43,14 +43,14 @@ jobs:
 
       - name: Cache multiple paths
         uses: actions/cache@v2
-          with:
-            path: |
-              ~/cache
-              !~/cache/exclude
-              **/node_modules
-              **/.cache/yarn
-              /usr/local/share/.cache/yarn
-            key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+        with:
+          path: |
+            ~/cache
+            !~/cache/exclude
+            **/node_modules
+            **/.cache/yarn
+            /usr/local/share/.cache/yarn
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
       - name: Build image
         run: docker build . --file ./dockerFiles/Dockerfile --tag $IMAGE_NAME
