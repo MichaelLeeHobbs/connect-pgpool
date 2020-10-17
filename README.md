@@ -164,4 +164,5 @@ msg = {
     * [ ] Add support for plugins.
     * [x] Run test inside a container to see if this fixes the issue with them failing on github
     * [x] Cache container images on github to speed up build time. May not be possiable?
+    * [ ] cache is not caching docker images, may not be possiable
     * [ ] Verify caching is working as expected
