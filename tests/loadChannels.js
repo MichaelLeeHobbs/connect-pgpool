@@ -51,9 +51,3 @@ const loadChannels = async (mirthHost) => {
 }
 
 module.exports = loadChannels
-
-// curl --insecure https://localhost:8443
-// curl http://localhost:8080
-//curl -X POST --insecure --user admin:admin "https://localhost:8443/api/channels/_start?returnErrors=true" -H "accept: application/xml" -H "Content-Type: application/x-www-form-urlencoded" -d "channelId=3d194c52-0c93-4104-95cb-c4c2baaa8f85"
-//curl -X POST --insecure --user admin:admin "https://localhost:8443/api/channels/3d194c52-0c93-4104-95cb-c4c2baaa8f85/_start?returnErrors=true" -H "accept: application/xml"
-//curl -X POST "https://localhost:8443/api/channels/_deploy?returnErrors=true" -H "accept: application/xml" -H "Content-Type: application/json" -d "{ \"set\": { \"string\": [ \"3d194c52-0c93-4104-95cb-c4c2baaa8f85\" ] }}"
