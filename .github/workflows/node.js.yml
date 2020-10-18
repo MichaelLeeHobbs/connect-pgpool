@@ -3,6 +3,20 @@
 
 name: Node.js CI
 
+definitions:
+  steps:
+    - step: &cache
+        - name: Cache multiple paths
+          uses: actions/cache@v2
+          with:
+            path: |
+              ~/cache
+              !~/cache/exclude
+              **/node_modules
+              **/.cache/yarn
+              /usr/local/share/.cache/yarn
+              /var/lib/docker/overlay2
+            key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 on:
   push:
     branches: [ main ]
@@ -19,18 +33,10 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Cache multiple paths
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/cache
-          !~/cache/exclude
-          **/node_modules
-          **/.cache/yarn
-          /usr/local/share/.cache/yarn
-          /var/lib/docker/overlay2
-        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+      - name: Checkout
+        uses: actions/checkout@v2
+    <<: *cache
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
