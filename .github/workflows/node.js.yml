@@ -29,24 +29,38 @@ jobs:
 
     strategy:
       matrix:
-#        node-version: [10.x, 12.x, 14.x]
         node-version: [14.x]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 #        <<: *cache
-      - name: Cache multiple paths
+      - name: Cache Node Modules
         uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
         with:
           path: |
+            ~/.npm
             ~/cache
             !~/cache/exclude
             **/node_modules
             **/.cache/yarn
             /usr/local/share/.cache/yarn
-            /var/lib/docker/overlay2
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Cache Docker
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-docker
+        with:
+          path: /var/lib/docker/overlay2
+          key: ${{ runner.os }}-docker
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
