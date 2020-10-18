@@ -157,15 +157,15 @@ msg = {
 * Initial Release
 
 ## TODO
-    * [x] Add request signing using api key~~
-    * [ ] Add HAPorxy config example of HTTPS/SSL with LetEncrypt?
-    * [x] Add example Mirth Connect code
-    * [x] Setup GitHub Action
-    * [x] Docker Image Pushed to Docker Hub
-    * [ ] Add support for other types of SQL Databases.
-    * [ ] Add support for plugins.
-    * [x] Run test inside a container to see if this fixes the issue with them failing on github
-    * [x] Cache container images on github to speed up build time. May not be possiable?
-    * [ ] cache is not caching docker images, may not be possiable
-    * [ ] Verify caching is working as expected
-    * [ ] Better readme =)
+- [x] Add request signing using api key~~
+- [ ] Add HAPorxy config example of HTTPS/SSL with LetEncrypt?
+- [x] Add example Mirth Connect code
+- [x] Setup GitHub Action
+- [x] Docker Image Pushed to Docker Hub
+- [ ] Add support for other types of SQL Databases.
+- [ ] Add support for plugins.
+- [x] Run test inside a container to see if this fixes the issue with them failing on github
+- [x] Cache container images on github to speed up build time. May not be possiable?
+- [ ] cache is not caching docker images, may not be possiable
+- [ ] Verify caching is working as expected
+- [ ] Better readme =)
