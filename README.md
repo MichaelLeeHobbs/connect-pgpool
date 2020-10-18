@@ -1,3 +1,5 @@
+![Node.js CI](https://github.com/MichaelLeeHobbs/connect-pgpool/workflows/Node.js%20CI/badge.svg) ![Docker](https://github.com/MichaelLeeHobbs/connect-pgpool/workflows/Docker/badge.svg)
+
 # Connect-PGPool
 
 The Connect-PGPool is a simple Node.js app with the goal of eliminate the need to manage DB connection inside Mirth Connect which is frequently the source of
