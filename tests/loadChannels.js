@@ -10,7 +10,7 @@ const loadChannel = ({mirthHost, Authorization, body}) => fetch(`https://${mirth
     body
 })
     .then(async res => {
-        let result = res.text()
+        let result = await res.text()
         if (result.includes('Please try again shortly.')) {
             await sleep(2000)
             return loadChannels({mirthHost, Authorization, body})
