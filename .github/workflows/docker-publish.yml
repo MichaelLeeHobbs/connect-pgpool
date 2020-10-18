@@ -1,10 +1,8 @@
 name: Docker
 
 on:
-  push:
-    # Publish `main` as Docker `latest` image.
-    branches:
-      - 'releases/**'
+  release:
+    types: [released]
 
     # Publish `v1.2.3` tags as releases.
     tags:
@@ -45,7 +43,7 @@ jobs:
     needs: test
 
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: github.event_name == 'release'
 
     steps:
       - name: Checkout
