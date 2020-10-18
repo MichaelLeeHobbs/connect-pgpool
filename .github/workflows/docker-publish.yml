@@ -15,32 +15,16 @@ on:
   pull_request:
 
 env:
-  # TODO: Change variable to your image's name.
   IMAGE_NAME: connect-pgpool
 
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-#  test:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Run tests
-#        run: yarn build && yarn start:github && yarn setupMirth && yarn test
-
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
-  push:
-    # Ensure test job passes before pushing image.
-#    needs: test
-
+  test:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-
     steps:
-      - uses: actions/checkout@v2
-
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Cache multiple paths
         uses: actions/cache@v2
         with:
@@ -50,6 +34,42 @@ jobs:
             **/node_modules
             **/.cache/yarn
             /usr/local/share/.cache/yarn
+            /var/lib/docker/overlay2
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install
+      - run: yarn build:test
+      - run: yarn start:github
+      - run: MIRTH_HOST=$(yarn findMirth)
+      - run: yarn setupMirth:action
+      - run: yarn test:action
+
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+    # Ensure test job passes before pushing image.
+    needs: test
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/cache
+            !~/cache/exclude
+            **/node_modules
+            **/.cache/yarn
+            /usr/local/share/.cache/yarn
+            /var/lib/docker/overlay2
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
       - name: Build image

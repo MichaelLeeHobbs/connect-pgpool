@@ -3,25 +3,25 @@
 
 name: Node.js CI
 
-definitions:
-  steps:
-    - &cache
-      name: Cache multiple paths
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/cache
-          !~/cache/exclude
-          **/node_modules
-          **/.cache/yarn
-          /usr/local/share/.cache/yarn
-          /var/lib/docker/overlay2
-        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+#definitions:
+#  steps:
+#    - &cache
+#      name: Cache multiple paths
+#      uses: actions/cache@v2
+#      with:
+#        path: |
+#          ~/cache
+#          !~/cache/exclude
+#          **/node_modules
+#          **/.cache/yarn
+#          /usr/local/share/.cache/yarn
+#          /var/lib/docker/overlay2
+#        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+#on:
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
 
 jobs:
   build:
@@ -35,7 +35,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        <<: *cache
+#        <<: *cache
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/cache
+            !~/cache/exclude
+            **/node_modules
+            **/.cache/yarn
+            /usr/local/share/.cache/yarn
+            /var/lib/docker/overlay2
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
