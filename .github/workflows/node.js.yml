@@ -5,18 +5,18 @@ name: Node.js CI
 
 definitions:
   steps:
-    - step: &cache
-        - name: Cache multiple paths
-          uses: actions/cache@v2
-          with:
-            path: |
-              ~/cache
-              !~/cache/exclude
-              **/node_modules
-              **/.cache/yarn
-              /usr/local/share/.cache/yarn
-              /var/lib/docker/overlay2
-            key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+    - &cache
+      name: Cache multiple paths
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/cache
+          !~/cache/exclude
+          **/node_modules
+          **/.cache/yarn
+          /usr/local/share/.cache/yarn
+          /var/lib/docker/overlay2
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 on:
   push:
     branches: [ main ]
@@ -35,15 +35,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-    <<: *cache
+        <<: *cache
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn install
-    - run: yarn build:test
-    - run: yarn start:github
-    - run: MIRTH_HOST=$(yarn findMirth)
-    - run: yarn setupMirth:action
-    - run: yarn test:action
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install
+      - run: yarn build:test
+      - run: yarn start:github
+      - run: MIRTH_HOST=$(yarn findMirth)
+      - run: yarn setupMirth:action
+      - run: yarn test:action
