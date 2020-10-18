@@ -26,11 +26,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -52,15 +50,6 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-
-      - name: Cache Docker
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-docker
-        with:
-          path: /var/lib/docker/overlay2
-          key: ${{ runner.os }}-docker
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
