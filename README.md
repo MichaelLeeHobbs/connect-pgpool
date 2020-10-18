@@ -115,7 +115,7 @@ services:
       - db
 
   cpgp:
-    image: michaelleehobbs/connect-pgpool:0.1.1
+    image: ghcr.io/michaelleehobbs/connect-pgpool:1.0.1
     environment:
       POSTGRES_USER=mirthdb
       POSTGRES_DB=mirthdb

@@ -8,5 +8,6 @@ services:
   pgadmin:
     env_file: ../env/pgadmin.prod.env
   cpgp:
+    image: ghcr.io/michaelleehobbs/connect-pgpool:1.0.1
     env_file: ../env/cpgp.prod.env
 
