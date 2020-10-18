@@ -17,11 +17,11 @@ name: Node.js CI
 #          /usr/local/share/.cache/yarn
 #          /var/lib/docker/overlay2
 #        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-#on:
-#  push:
-#    branches: [ main ]
-#  pull_request:
-#    branches: [ main ]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
