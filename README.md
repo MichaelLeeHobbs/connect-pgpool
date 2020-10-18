@@ -45,6 +45,7 @@ Connect-PGPool as you need! It's lightweight and takes up 50MB of ram on average
 ```bash
 docker run -d \
     --name cpgpool-01 \
+    -e MIRTH_HOST=mirth
     -e POSTGRES_USER=mirthdb
     -e POSTGRES_DB=mirthdb
     -e POSTGRES_PW=mirthdb
@@ -53,7 +54,7 @@ docker run -d \
     -e POSTGRES_MAX_POOL=10
     -e POSTGRES_IDLE_TIMEOUT=30000
     -e PRIVATE_KEY=badkey
-    michaelleehobbs/connect-pgpool
+    ghcr.io/michaelleehobbs/connect-pgpool:1.0.1
 ```
 ### Docker Compose
 ```yaml
