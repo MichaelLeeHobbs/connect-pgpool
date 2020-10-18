@@ -96,7 +96,7 @@
 var dbClient = cpgp.getClient(&apos;http://cpgp:3000&apos;, &apos;1337D3Vi$n00b&apos;)
 
 msg = {
-	query: &quot;query returns the full raw results from pg pool.&quot;, 
+	query: &quot;query returns the full raw results from pg pool.&quot;,
 	result: dbClient.query({query: &apos;select * from channel;&apos;, params: []})
 }</script>
           </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
@@ -187,7 +187,7 @@ msg = {
 var dbClient = cpgp.getClient(&apos;http://cpgp:3000&apos;, &apos;1337D3Vi$n00b&apos;)
 
 msg = {
-	exec: &quot;exec returns the full set of rows.&quot;, 
+	exec: &quot;exec returns the full set of rows.&quot;,
 	result: dbClient.exec({query: &apos;select * from channel;&apos;, params: []})
 }</script>
           </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
@@ -278,7 +278,7 @@ msg = {
 var dbClient = cpgp.getClient(&apos;http://cpgp:3000&apos;, &apos;1337D3Vi$n00b&apos;)
 
 msg = {
-	execOne: &quot;execOne returns the full frist row.&quot;, 
+	execOne: &quot;execOne returns the full first row.&quot;,
 	result: dbClient.execOne({query: &apos;select * from channel;&apos;, params: []})
 }</script>
           </com.mirth.connect.plugins.javascriptstep.JavaScriptStep>
