@@ -21,8 +21,8 @@ many errors, poor performance, and downtime.
 I have not yet finished the GitHub actions setup to push a copy of the image to dockerhub. For now use the [Quick Start for Testing](#Quick Start for Testing)
 to test and/or build an image.
 
-**Use at your own risk!** I am not responsible for any downtime or loss of life that may result from the use of this software. This software is actively being
-used in a production environment at multiple companies to manage 10's to 100's of thousands of DB connections per day. 
+**Use at your own risk!** I am not responsible for any downtime or loss of life that may result from the use of this software. Variations of this software 
+is used in production environments at multiple companies to manage 10's to 100's of thousands of DB connections per day for Mirth Connect. 
 
 ## TLDR
 Let Connect-PGPool handle your db connections to a PostgreSQL DB with pooling and automated error handling! Stop storing you DB Connections in maps or 
@@ -147,8 +147,18 @@ Inside a mirth channel add a dependency for `ConnectPGPool` and try the code bel
 var dbClient = cpgp.getClient('http://cpgp:3000', 'badkey')
 
 msg = {
-	query: "query returns the full raw results from pg pool.", 
-	result: dbClient.query({query: 'select * from channel;', params: []})
+    query: {
+        text: "query returns the full raw results from pg pool.", 
+        result: dbClient.query({query: 'select * from channel;', params: []})
+    },
+    exec: {
+        exec: "exec returns the full set of rows.", 
+        result: dbClient.exec({query: 'select * from channel;', params: []})
+    },
+    execOne: {
+        exec: "execOne returns the full first row.", 
+        result: dbClient.execOne({query: 'select * from channel;', params: []})
+    }
 }
 ```
 
@@ -171,3 +181,4 @@ msg = {
 - [x] cache is not caching docker images, it is not be possible without doing something outside the design "Warning: EACCES: permission denied, scandir '/var/lib/docker/overlay2'"
 - [x] Verify caching is working as expected
 - [ ] Better readme =)
+- [ ] clean up/organize tests
