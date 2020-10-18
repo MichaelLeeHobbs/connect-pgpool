@@ -29,19 +29,6 @@ const loadChannels = async (mirthHost) => {
 
     const testRunner = fs.readFileSync(path.resolve(__dirname, '../channels/TestRunner.xml'), 'utf8')
     promises.push(loadChannel({mirthHost, Authorization, body: testRunner}).then((res) =>console.log('Load testInterface results: ', res)))
-    // promises.push(fetch(`https://${mirthHost}:8443/api/channels`, {
-    //         method: 'POST',
-    //         headers: {Authorization, accept: "application/json", "Content-Type": "application/xml"},
-    //         body: testRunner
-    //     })
-    //         .then(res => res.text())
-    //         .then((res) => {
-    //             if (res.includes('Please try again shortly.'))
-    //                 console.log('Load testRunner results: ', res)
-    //         })
-    // )
-    // .catch(console.error)
-
 
     const deployChannels = JSON.stringify({"set": {"string": ["3d194c52-0c93-4104-95cb-c4c2baaa8f85", "ac780bfa-1a27-4d37-ba85-5d57c1a4bfdd"]}})
     return Promise.all(promises)
@@ -51,8 +38,10 @@ const loadChannels = async (mirthHost) => {
                 headers: {Authorization, accept: "application/json", "Content-Type": "application/json"},
                 body: deployChannels
             })
-                .then(res => res.text())
-                .then((res) => console.log('Start TestInterface results: ', res))
+                .then(async res => {
+                    console.log('Start TestInterface results: ', await res.text())
+                    await sleep(2000)
+                })
                 .catch((e) => console.error('Start TestInterface error: ', e))
         })
         .catch(e => {
