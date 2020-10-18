@@ -2,11 +2,11 @@ version: '3.7'
 
 services:
   postgres:
-    env_file: ../env/pg.env
+    env_file: ../env/pg.prod.env
   mirth:
-    env_file: ../env/mirth.env
+    env_file: ../env/mirth.prod.env
   pgadmin:
-    env_file: ../env/ pgadmin.env
+    env_file: ../env/pgadmin.prod.env
   cpgp:
-    env_file: ../env/cpgp.env
+    env_file: ../env/cpgp.prod.env
 

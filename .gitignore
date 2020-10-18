@@ -120,3 +120,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# Ignore prod env files
+**/*.prod.env
