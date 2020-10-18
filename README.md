@@ -153,19 +153,21 @@ msg = {
 ```
 
 ## Changes
-### Version 0.1.1
+### Version 1.0.0
 * Initial Release
+### Version 0.1.1
+* Initial Alpha Release
 
 ## TODO
-- [x] Add request signing using api key~~
-- [ ] Add HAPorxy config example of HTTPS/SSL with LetEncrypt?
+- [x] Add request signing using api key
+- [ ] Add HAProxy config example of HTTPS/SSL with LetEncrypt?
 - [x] Add example Mirth Connect code
 - [x] Setup GitHub Action
 - [x] Docker Image Pushed to Docker Hub
 - [ ] Add support for other types of SQL Databases.
 - [ ] Add support for plugins.
 - [x] Run test inside a container to see if this fixes the issue with them failing on github
-- [x] Cache container images on github to speed up build time. May not be possiable?
-- [ ] cache is not caching docker images, may not be possiable
-- [ ] Verify caching is working as expected
+- [x] Cache container images on github to speed up build time. May not be possible?
+- [x] cache is not caching docker images, it is not be possible without doing something outside the design "Warning: EACCES: permission denied, scandir '/var/lib/docker/overlay2'"
+- [x] Verify caching is working as expected
 - [ ] Better readme =)
