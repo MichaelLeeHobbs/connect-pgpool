@@ -4,7 +4,6 @@ on:
   push:
     # Publish `main` as Docker `latest` image.
     branches:
-#      - main
       - 'releases/**'
 
     # Publish `v1.2.3` tags as releases.
@@ -22,21 +21,12 @@ jobs:
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Cache multiple paths
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/cache
-            !~/cache/exclude
-            **/node_modules
-            **/.cache/yarn
-            /usr/local/share/.cache/yarn
-            /var/lib/docker/overlay2
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -60,23 +50,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Cache multiple paths
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/cache
-            !~/cache/exclude
-            **/node_modules
-            **/.cache/yarn
-            /usr/local/share/.cache/yarn
-            /var/lib/docker/overlay2
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-
       - name: Build image
         run: docker build . --file ./dockerFiles/Dockerfile --tag $IMAGE_NAME
 
       - name: Log into GitHub Container Registry
-        # TODO: Create a PAT with `read:packages` and `write:packages` scopes and save it as an Actions secret `CR_PAT`
         run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image to GitHub Container Registry
